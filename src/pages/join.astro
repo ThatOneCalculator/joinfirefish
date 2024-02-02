@@ -10,7 +10,7 @@ import IconLabelButton from "../components/IconLabelButton.astro";
 import InstanceCard from "../components/InstanceCard.astro";
 import Mention from "../components/Mention.astro";
 import Data from "../components/Data.astro";
-import { tokenize } from "sentence-tools";
+// import { tokenize } from "sentence-tools";
 
 changeLanguage("en");
 
@@ -328,7 +328,7 @@ for (let category of categories) {
                     instance.banner = meta.bannerUrl;
             }
             if (instance.description == null)
-                instance.description = tokenize(meta.description)
+                instance.description = meta.description
                     .replace(/instance/gi, "server")
                     .replace(/Calckey/gi, "Firefish")
                     .replace(/(<([^>]+)>)/gi, "");
