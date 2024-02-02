@@ -13,8 +13,6 @@ import "@fontsource-variable/nunito";
 import { ViewTransitions } from "astro:transitions";
 import Sidebar from "../components/Sidebar.astro";
 import Footer from "../components/Footer.astro";
-import { Head } from "astro-capo";
-import { HeadHrefLangs } from "astro-i18next/components";
 
 export interface Props {
   title: string;
@@ -31,7 +29,7 @@ const formattedTitle = title.includes("Home")
 
 <!DOCTYPE html>
 <html lang="en">
-	<Head>
+	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -92,7 +90,7 @@ const formattedTitle = title.includes("Home")
 			data-website-id="5bd15fa1-3b1c-4e3f-a3a3-bdcedf6260f1">
 		</script> -->
 		<ViewTransitions />
-	</Head>
+	</head>
 	<body id="firefish">
 		<div>
 			<Sidebar />
