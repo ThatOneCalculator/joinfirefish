@@ -1,0 +1,95 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { name, price, src, href } = Astro.props;
+const isJapanese = false; //TODO: use lang
+let realPrice = price;
+const currency = isJapanese ? "¥" : "$";
+if (isJapanese) {
+    import googleCurrencyScraper, { CurrencyCode } from "google-currency-scraper";
+
+    const data = await googleCurrencyScraper({
+        from: CurrencyCode.USD,
+        to: CurrencyCode.JPY
+    });
+    realPrice = Math.round(price * data.rate);
+}
+---
+
+<a class="listing" href={ href } target="_blank">
+    <div class="avatar">
+        <img src={ src }/>
+    </div>
+    <h2 class="name">{ name }</h2>
+    <div class="price">{ currency }{ realPrice }</div>
+    <Icon name="ph:arrow-square-out"></Icon>
+</a>
+
+<style lang="stylus">
+    a
+        text-decoration none
+
+    .listing
+        padding 2.5em 3em
+        padding-bottom 2em
+        width 20em
+        display flex
+        flex-direction column
+        align-items center
+        justify-content center
+        position relative
+
+        &::before
+            content ""
+            position absolute
+            inset 0
+            background var(--accentDarken)
+            transform translate(-10px, 10px)
+            z-index -1
+            opacity 0
+            border-radius var(--radius)
+            transition opacity .2s, transform .4s
+
+        /.avatar
+            background var(--bg)
+            width 250px
+            height 280px
+            margin-bottom .5em
+            transition transform .7s cubic-bezier(0,.5,0,1)
+            &:hover
+                transform translateY(-0.5rem)
+        /.name
+            margin 0.2rem 0
+            width max-content
+        /.price
+            color var(--fg)
+            font-size 1.2em
+            font-weight 400
+            margin 0
+            width max-content
+
+        > svg
+            position absolute
+            top 1em
+            right 1em
+            transform translate(-20px, 20px)
+            opacity 0.5
+            text-shadow 0 4px 12px var(--accentTransparent)
+            width 1.5em
+            height @width
+            transition transform .7s cubic-bezier(0,0,0,1), opacity .2s
+
+        &:hover, &:focus
+            &::before
+                opacity .1
+                inset 0
+                transform none
+                transition opacity .2s, transform .4s cubic-bezier(0,0,0,1)
+            > svg
+                opacity 1
+                transform none
+                transition transform .7s cubic-bezier(0,0.5,0,1), opacity .2s
+            .avatar
+                transform translate(4px, -4px)
+
+</style>

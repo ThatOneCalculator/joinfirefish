@@ -1,0 +1,57 @@
+---
+let { mockuped, isAuthor } = Astro.props;
+
+isAuthor = isAuthor ? "isAuthor" : null;
+mockuped = mockuped ? "mockuped" : null;
+
+---
+
+<span class={`bubble ${isAuthor} ${mockuped}`} aria-label={ mockuped ? "" : null }>
+	<slot>
+		<span class="lined" aria-hidden="true">
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+		</span>
+	</slot>
+</span>
+<style lang="stylus">
+.bubble
+	position relative
+	display: block;
+	margin: 0;
+	padding: 12px 18px;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	word-break: break-word;
+	font-size: 1em;
+	color: #000c;
+	margin-top 20px
+	min-height: 38px;
+	border-radius: 16px;
+	width max-content
+	max-width: 95%;
+	color var(--fg)
+	z-index 2
+	text-align left
+	isolation isolate
+	&::before, &::after
+		content ""
+		position absolute
+		inset 0
+		z-index -1
+		background var(--bg)
+	&::after
+		background var(--panelHighlight)
+	&.isAuthor
+		color var(--fgOnAccent)
+		text-align right
+		font-weight 700
+		> span
+			color inherit !important
+		&::after
+			background var(--accent)
+		margin-left auto
+	&.mockuped
+		color transparent
+		:global(*)
+			visibility hidden
+</style>

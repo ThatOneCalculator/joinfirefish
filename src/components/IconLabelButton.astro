@@ -1,0 +1,119 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { href, icon, target, sub, classes, download } = Astro.props;
+---
+{href == Astro.url.pathname ?
+	<a href="#" class={"label-button " + classes} aria-current="page">
+		{icon &&
+			<Icon name={icon}/>
+		}
+		<span>
+			<slot></slot>
+			{sub &&
+				<sub>{sub}</sub>
+			}
+		</span>
+	</a>
+	:
+	<a href={href} class={"label-button " + classes} target={target} download={download}>
+		{icon &&
+			<Icon name={icon}/>
+		}
+		<span>
+			<slot></slot>
+			{target == "_blank" &&
+				<Icon name="ph:arrow-square-out" style="margin-left: 0.3em"></Icon>
+			}
+			{href.substring(0,1) == "#" &&
+				<Icon name="ph:arrow-right" style="margin-left: 0.3em"></Icon>
+			}
+			{sub &&
+				<sub>{sub}</sub>
+			}
+		</span>
+	</a>
+}
+<style lang="stylus">
+	[data-icon]
+		font-size 1.2em
+	a
+		display flex
+		align-items center
+		padding 1em
+		color var(--fg)
+		text-decoration none
+		font-weight 600
+		border-radius var(--radius)
+		// white-space nowrap
+		box-sizing border-box
+		transition color .2s, opacity .4s, transform .3s
+		&[aria-current]
+			color var(--accent)
+			font-weight 800
+		:global(svg)
+			margin-right 1em
+			transition color .2s, transform .3s cubic-bezier(0,0,0,1), opacity .4s
+		span
+			position relative
+			transition filter .2s, transform .3s cubic-bezier(0,0,0,1.2)
+			> svg:last-of-type
+				margin-left 0em
+				height 1em
+				vertical-align -.15em
+				margin-right 0
+			&::before
+				content ""
+				position absolute
+				inset -.7em -1em
+				background var(--accentedBg)
+				border-radius 1.5em
+				opacity 0
+				transition opacity .2s, inset .3s cubic-bezier(0,0,0,2)
+			> :global(span)
+				display inline-block
+				margin-block -1em
+				// margin-left .7em
+				vertical-align .1em
+				margin-inline-end .7em
+				padding-inline .7em
+				font-size .8em
+				color var(--accent)
+		sub
+			display block
+		svg + span::before
+			left -3.2em
+
+		for row in (1..10)
+			&:nth-child({row})
+				&, :global(svg), span
+					transition-delay (.02 * row) - .02s
+
+		&.solid
+			color var(--fgOnAccent) !important
+			margin 0
+			font-weight 700
+			> svg
+				transform translateX(.4em)
+			> span::before
+				background var(--accent) !important
+				opacity 1 !important
+				z-index -1
+
+			&.themed
+				color var(--fg) !important
+				> span::before
+					background var(--accentDarken) !important
+					opacity .2 !important
+
+		&:hover, &:focus
+			color var(--accent)
+			span
+				transition opacity .4s
+			span::before
+				opacity 1
+				inset -.8em -1.1em
+			svg + span::before
+				left -3.3em
+
+</style>

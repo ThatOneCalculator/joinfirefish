@@ -1,0 +1,115 @@
+---
+import PostContainer from "./skeletons/PostContainer.astro";
+import Post from "./skeletons/Post.astro";
+import IconLabelButton from "./IconLabelButton.astro";
+import Reaction from "./skeletons/Reaction.astro";
+import MessageBubble from "./MessageBubble.astro";
+import { t } from "i18next"
+---
+
+<PostContainer>
+	<Post class="item" id="post" readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@fred@firefish.social" ticker="Firefish">
+		<div class="media content" style="font-size: 1.1em">
+			<div class="content centered">
+				<p class="highlight desktop-only">{ t("communitySub.0") }</p>
+				<div class="flex gap small centered">
+					<a class="button themed glow" href="/join">{ t("getStarted.getStarted") }</a>
+					<IconLabelButton href="#sections">{ t("getStarted.learnMore") }</IconLabelButton>
+				</div>
+			</div>
+		</div>
+		<div class="reactions">
+			<Reaction e="blobfoxaww"></Reaction>
+			<Reaction e="glub"></Reaction>
+			<Reaction e="heart"></Reaction>
+			<Reaction e="shh"></Reaction>
+			<Reaction e="wave"></Reaction>
+			<Reaction e="woozy"></Reaction>
+		</div>
+	</Post>
+</PostContainer>
+<div class="item" id="bubbles">
+	<MessageBubble isAuthor></MessageBubble>
+	<MessageBubble></MessageBubble>
+	<MessageBubble isAuthor>{ t("communitySub.0") }</MessageBubble>
+	<MessageBubble>
+		<div class="flex gap small centered" style="font-size: 1.1em">
+			<a class="button themed glow" href="/join">{ t("getStarted.getStarted") }</a>
+			<IconLabelButton href="#sections">{ t("getStarted.learnMore") }</IconLabelButton>
+		</div>
+	</MessageBubble>
+	<MessageBubble isAuthor></MessageBubble>
+</div>
+<!-- <div class="item" id="floating" class="media ratio">
+	<div class="content centered">
+		<p class="highlight desktop-only">{ t("communitySub.0") }</p>
+		<div class="flex gap centered">
+			<a class="button themed glow" href="/#getstarted">{ t("getStarted.getStarted") }</a>
+			<IconLabelButton href="#sections">Learn More</IconLabelButton>
+		</div>
+	</div>
+</div> -->
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	gsap.registerPlugin(ScrollTrigger);
+
+
+	const tlDelay = 7
+
+	const tl = gsap.timeline({repeat: -1, repeatDelay: tlDelay});
+
+	const startPos = { y: 20, opacity: 0, pointerEvents: "none" };
+	const midPos = { y: 0, opacity: 1, pointerEvents: "all" };
+	const endPos = { y: -20, opacity: 0, pointerEvents: "none" };
+
+	// transition to post
+	tl.to("#hero #bubbles", endPos, tlDelay);
+	tl.to("#hero .posts-container", midPos, "<");
+	tl.set("#hero #bubbles", startPos);
+
+	// transition to bubbles
+	tl.to("#hero .posts-container", endPos);
+	tl.to("#hero #bubbles", midPos, "<");
+	tl.set("#hero .posts-container", startPos);
+
+
+
+	gsap.to("#bubbles", {
+		scrollTrigger: {
+			trigger: "#hero",
+			scrub: 1,
+			start: "top top"
+		},
+		gap: "20px",
+		y: -50
+	});
+
+</script>
+<style lang="stylus">
+	.item
+		&:not(:first-child)
+			position absolute
+			inset-inline 40px
+			bottom 40px
+	#bubbles
+		display flex
+		flex-direction column
+		justify-content flex-end
+		transform translateY(20px)
+		opacity 0
+		mask linear-gradient(to top, rgba(0,0,0,0.1), black 20% 60%, transparent)
+		-webkit-mask @mask
+		> :global(.bubble:last-child, .bubble:first-child)
+			opacity .5
+	#floating
+		bottom 140px !important
+		top unset !important
+		padding 0 !important
+		margin 0 !important
+		background none
+		z-index 100
+		p
+			white-space break-spaces
+			margin-bottom 40px
+</style>

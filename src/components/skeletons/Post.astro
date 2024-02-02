@@ -1,0 +1,56 @@
+---
+import Ticker from "../Ticker.astro";
+const { icon, name, href, at, ticker } = Astro.props;
+let { readable } = Astro.props;
+readable = readable ? null : "";
+---
+
+<article>
+  <header aria-hidden="true">
+    {icon ? <img alt="Avatar" class="avatar" src={icon} /> : <div class="avatar" />}
+    <div>
+      <div class="top">
+        <span class="displayname">{name}</span>
+        <span class="date lined">12hrs ago</span>
+      </div>
+      <div class="bottom">
+        {
+          href ? (
+            <a href={href} rel="me">
+              <span class="username">{at}</span>
+            </a>
+          ) : (
+            <span class="username">{at}</span>
+          )
+        }
+        <Ticker>{ticker}</Ticker>
+      </div>
+    </div>
+  </header>
+  <div class="content" aria-label={readable}>
+    <slot>
+      <p class="lined" aria-hidden="true">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
+        facere laudantium asperiores atque repellendus architecto, eos et rerum?
+        Ipsum ipsa molestias ullam quos ratione numquam accusantium provident
+        aliquid placeat assumenda.
+      </p>
+    </slot>
+  </div>
+</article>
+<style lang="stylus">
+	article
+		display block
+		> header
+			display flex
+			align-items center
+			line-height 1.5
+			text-shadow 0 2px 2px var(--shadow)
+			> div:last-child
+				flex-grow 1
+				margin-left .9em
+				> div
+					display flex
+					justify-content space-between
+
+</style>

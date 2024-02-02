@@ -1,0 +1,120 @@
+---
+import { Icon } from "astro-icon/components";
+
+const date = new Date().getFullYear().toString();
+---
+
+<footer>
+    <p>
+        <img id="img" slot="graphic" height="70" alt="" />
+    </p>
+    <p><span class="copyleft">&copy;</span> 2022 - {date} Firefish</p>
+    <div class="icons">
+        <a href="https://fedi.software/@firefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -1.3rem">Firefish</span>
+                <Icon name="firefish" />
+            </span>
+        </a>
+        <a href="https://twitter.com/@JoinFirefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -5.5rem">X, the site formerly known as Twitter</span>
+                <Icon name="ph:twitter-logo-bold" />
+            </span>
+        </a>
+        <a href="https://git.joinfirefish.org/firefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -0.8rem">Gitlab</span>
+                <Icon name="ph:gitlab-logo-simple-bold" />
+            </span>
+        </a>
+        <a href="https://repl.it/@JoinFirefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -0.7rem">Replit</span>
+                <Icon name="replit" />
+            </span>
+        </a>
+        <a href="https://opencollective.com/firefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -2.5rem">OpenCollective</span>
+                <Icon name="opencollective" />
+            </span>
+        </a>
+        <a href="https://hosted.weblate.org/engage/firefish">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -1.3rem">Weblate</span>
+                <Icon name="weblate" />
+            </span>
+        </a>
+        <a href="https://matrix.to/#/#firefish:matrix.fedibird.com">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -0.9rem">Matrix</span>
+                <Icon name="matrix" />
+            </span>
+        </a>
+        <a href="https://brandfetch.com/firefish.social">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -1.7rem">Brandfetch</span>
+                <Icon name="brandfetch" />
+            </span>
+        </a>
+        <a href="mailto:info@firefish.social">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -0.7rem">Email</span>
+                <Icon name="ph:envelope-open-bold" />
+            </span>
+        </a>
+        <a href="/rss.xml">
+            <span class="has-tooltip">
+                <span class="tooltip" style="right: -0.5rem">RSS</span>
+                <Icon name="ph:rss-simple-bold" />
+            </span>
+        </a>
+    </div>
+
+</footer>
+
+<script>
+    let imageSrc = '/branding/title.svg';
+    const randNumber = Math.round(Math.random() * 25);
+    switch (randNumber) {
+        case 1: imageSrc = '/images/emojis/glub.avif'; break;
+        default:
+    }
+    const imageElement = document.getElementById('img') as HTMLImageElement;
+    imageElement!.src = imageSrc;
+</script>
+
+<style lang="stylus">
+    .tooltip
+        font-size 0.5em !important
+
+    footer
+        text-align center
+        width 100%
+        font-size 1.25em
+        padding 60px
+        transition opacity .4s, transform .7s
+        .copyleft
+            display inline-block
+            transform rotate(180deg)
+        .icons
+            font-size 1.5em
+            > *
+                margin-right 1em
+                &:last-child
+                    margin-right 0
+        p
+            display block
+        a
+            display inline-block
+            color var(--fg)
+            opacity .7
+            text-underline-offset .2em
+            transition opacity .2s
+            font-size .9em
+            // margin-right .2em
+            vertical-align middle
+            &:hover, &:focus-within
+                opacity 1
+</style>

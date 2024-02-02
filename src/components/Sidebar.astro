@@ -1,0 +1,390 @@
+---
+import { Icon } from "astro-icon/components";
+import IconLabelButton from "./IconLabelButton.astro";
+import Logo from "./brand/Logo.astro";
+import LogoIcon from "./brand/LogoIcon.astro";
+import ThemeSelector from "./ThemeSelector.astro";
+import LanguageSelect from "./LanguageSelect.astro";
+import { getCollection } from 'astro:content';
+import { t } from "i18next";
+const allBlogs = await getCollection('blog');
+const allDocs = await getCollection('docs');
+
+const date = new Date().getFullYear().toString();
+---
+
+<header class="sidebar" id="sidebar">
+	<div class="content">
+		<div>
+			<div class="header">
+				<a href="/" class="logo">
+					<LogoIcon></LogoIcon>
+					<Logo width="500"></Logo>
+				</a>
+				<div class="button-swap">
+					<a href="#sidebar" class="icon-button">
+						<Icon name="ph:dots-three-outline-duotone"></Icon>
+					</a>
+					<a href="#n" href="icon-button">
+						<Icon name="ph:x-circle"></Icon>
+					</a>
+				</div>
+			</div>
+			<nav>
+				<IconLabelButton icon="ph:house-bold" href="/" data-umami-event="Sidebar Home">{ t("sidebar.home") }</IconLabelButton>
+				<IconLabelButton icon="ph:planet-bold" href="/join" data-umami-event="Sidebar Join">{ t("sidebar.serverList") }</IconLabelButton>
+				<IconLabelButton icon="ph:device-mobile-bold" href="/apps" data-umami-event="Sidebar Apps">{ t("sidebar.apps") }</IconLabelButton>
+				<IconLabelButton icon="ph:envelope-open-bold" href="/contact" data-umami-event="Sidebar Contact">{ t("sidebar.contact") }</IconLabelButton>
+				<IconLabelButton icon="ph:info-bold" href="/about" data-umami-event="Sidebar About">{ t("sidebar.about") }</IconLabelButton>
+				<IconLabelButton icon="ph:pencil-simple-line-bold" href="#blog" data-umami-event="Sidebar Blog">{ t("sidebar.blog") }</IconLabelButton>
+				<IconLabelButton icon="ph:notebook-bold" href="#docs" data-umami-event="Sidebar Docs">{ t("sidebar.docs") }</IconLabelButton>
+				<!-- <IconLabelButton icon="ph:shopping-cart-bold" href="https://shop.joinfirefish.org" target="_blank" data-umami-event="Sidebar Merch">{ t("sidebar.merch") }</IconLabelButton> -->
+				<IconLabelButton icon="ph:gitlab-logo-simple-bold" href="https://git.joinfirefish.org/firefish/firefish" target="_blank" data-umami-event="Sidebar Firefish source code">{ t("sidebar.sourceCode") }</IconLabelButton>
+			</nav>
+			<footer>
+				<hr>
+				<LanguageSelect />
+				<!-- <div class="select-container">
+					<label for="languageSelector">
+						<Icon name="ph:globe"></Icon>
+					</label>
+					<select name="language" id="languageSelector">
+						<option value="en">English</option>
+						<option value="ja">日本</option>
+					</select>
+				</div> -->
+
+				<p><span class="copyleft">&copy;</span> 2022 - {date} Firefish</p>
+				<div class="icons">
+					<a href="https://fedi.software/@firefish">
+						<Icon name="firefish" />
+					</a>
+					<a href="https://twitter.com/@JoinFirefish">
+						<Icon name="ph:twitter-logo-bold" />
+					</a>
+					<a href="https://repl.it/@JoinFirefish">
+						<Icon name="replit" />
+					</a>
+					<a href="https://opencollective.com/firefish">
+						<Icon name="opencollective" />
+					</a>
+					<a href="https://hosted.weblate.com/engage/firefish">
+						<Icon name="weblate" />
+					</a>
+					<a href="https://matrix.to/#/#firefish:matrix.fedibird.com">
+						<Icon name="matrix" />
+					</a>
+					<a href="mailto:info@firefish.social">
+						<Icon name="ph:envelope-open-bold" />
+					</a>
+				</div>
+				<p style="font-size: 0.8em">Made with
+					<a aria-label="Astro" href="https://astro.build/" target="_blank"><Icon name="astro" class="madeWithIcon" id="astroIcon"/></a>,
+					<a aria-label="Stylus-lang" href="https://stylus-lang.com/" target="_blank"><Icon name="stylus" class="madeWithIcon" id="stylusIcon"/></a>,
+					and <a aria-label="" href="https://git.joinfirefish.org/firefish/joinfirefish" target="_blank"><Icon name="ph:heart-bold" class="madeWithIcon" id="heartIcon"/></a>
+				</p>
+			</footer>
+		</div>
+	</div>
+	<section class="extra" id="blog" tabindex="-1">
+		<div class="content">
+			<div class="header">
+				<h2>
+					Blog
+					<a href="/rss.xml" href="icon-button">
+						<Icon name="ph:rss-simple-bold" style="color: var(--hashtag); height: 1.5rem; transform: translateY(0.25rem)"></Icon>
+					</a>
+				</h2>
+				<a href="#" href="icon-button">
+					<Icon name="ph:x-circle"></Icon>
+				</a>
+			</div>
+			{allBlogs.map(blogPost => (
+				<IconLabelButton
+					sub={blogPost.data.pubDate.toDateString()}
+					href={`/blog/${blogPost.slug}`}>
+						{blogPost.data.title}
+				</IconLabelButton>
+			))}
+		</div>
+	</section>
+	<section class="extra" id="docs" tabindex="-1">
+		<div class="content">
+			<div class="header">
+				<h2>Docs</h2>
+				<a href="#" href="icon-button">
+					<Icon name="ph:x-circle"></Icon>
+				</a>
+			</div>
+			{allDocs.map(docPage => (
+				<IconLabelButton href={`/docs/${docPage.slug}`}>
+					{docPage.data.title}
+				</IconLabelButton>
+			))}
+		</div>
+	</section>
+</header>
+<style lang="stylus">
+	:global(html)
+		--sidebar-width 4.55em
+	.sidebar
+		position fixed
+		top 0
+		width var(--sidebar-width)
+		height 100vh
+		z-index 10
+		display flex
+		flex-direction column
+		transition width .4s cubic-bezier(0,0,0,1), border-color .2s, transform .7s
+		contain content layout paint
+		border-right 1px solid var(--divider)
+		html.top &:not(:focus-within):not(:hover)
+			border-right-color transparent
+			.logo
+				opacity 0
+				transition height .2s, opacity .2s
+		html.top &
+			transform translateX(22.5px)
+			.content
+				transform translateY(20px)
+		// 	mask linear-gradient(black 800px, transparent 900px) !important
+		// 	-webkit-mask @mask
+		// box-shadow 24px 0 24px rgba(0,0,0,0.02)
+		& + :global(main)
+			margin-left 72.5px !important
+		&::before
+			content ""
+			position absolute
+			inset 0
+			left -900px
+			opacity 0
+			z-index -2
+			background var(--acrylicBg)
+			backdrop-filter blur(8px)
+			transition background .2s
+		&::after
+			content ""
+			position fixed
+			inset -9000px
+			background var(--bg)
+			opacity 0
+			pointer-events none
+			transition opacity .4s cubic-bezier(0,0,0,1)
+			z-index -100
+
+		@media (max-width 1600px)
+			&::before
+				opacity 1
+
+		/.header
+			display flex
+			justify-content space-between
+
+		/.button-swap
+			display none
+
+		/.content
+			overflow hidden
+			box-sizing border-box
+			height 100vh
+			padding 0 1.6em
+			padding-block 10vh !important
+			transition padding-top .4s, transform .7s
+			> div
+				width 13em
+
+		/.logo
+			position relative
+			display block
+			margin-bottom 1.5em
+			margin-left 0.4rem
+			height 22px
+			transition height .2s, opacity .2s .2s
+			> :global(:last-child)
+				position absolute
+				top -65%
+				left 0
+				height 180%
+				width auto
+				object-fit contain
+				opacity 0
+				transform translateX(4px)
+				transition opacity 0s .2s, transform .7s
+				transition opacity .2s, transform .4s
+				transition-delay .1s
+			> :global(:first-child)
+				position absolute
+				height 100%
+				left -4px
+				// width var(--sidebar-width)
+				// height 24px
+				transition opacity 0s .2s, transform .7s
+				transition opacity .2s, transform .4s
+				transition-delay .1s
+
+		/:global(.label-button)
+			margin-left -1em
+
+		/hr
+			margin 1.5em .5em
+
+		/footer
+			// opacity .9
+			font-size .85em
+			transition opacity .4s, transform .7s
+			.copyleft
+				display inline-block
+				transform rotate(180deg)
+			a
+				display inline-block
+				color var(--fg)
+				opacity .7
+				text-underline-offset .2em
+				transition opacity .2s
+				font-size .9em
+				// margin-right .2em
+				vertical-align middle
+				&:hover, &:focus-within
+					opacity 1
+			.icons
+				font-size 1.25rem
+				> *
+					margin-right 0.6em
+					&:last-child
+						margin-right 0
+
+		/.extra
+			position absolute
+			left 100%
+			top 0
+			height 100%
+			overflow hidden
+			background var(--acrylicBg)
+			border-inline 1px solid var(--divider)
+			width 18em
+			transform translateX(-10px)
+			filter opacity(0)
+			contain strict
+			transition transform .2s .1s, filter .4s .1s, visibility 0s .4s
+			visibility hidden
+			.content
+				width 18em
+				padding-inline 30px
+				overscroll-behavior contain
+				transform translateY(40px)
+				transition transform .7s .1s
+			h2
+				margin-top -.4em
+
+		html:not(.top) &:not(:hover):not(:focus-within):not(:target)
+			:global(.label-button)
+				color var(--accent)
+				:global(span)
+					filter opacity(0)
+					transform translateX(10px)
+		&:not(:hover):not(:focus-within):not(:target)
+			footer
+				opacity 0
+
+		&:hover, &:focus-within, html.top &
+			width 15.5em
+			.logo
+				transition height .2s, opacity .2s !important
+				> :global(:last-child)
+					opacity 1
+					transform none
+				> :global(:first-child)
+					opacity 0
+					transform translateX(10px)
+		&:hover, &:focus-within
+			.content
+				overflow hidden auto
+			.extra:target
+				transform none
+				filter opacity(1)
+				visibility visible
+				transition transform .2s .1s, filter .4s .1s, height .7s, visibility 0s
+				.content
+					transform none
+			&::before
+				opacity 1
+			&::after
+				opacity .8
+			& + :global(main *)
+				animation-play-state paused !important
+
+		@media (max-width 600px)
+			position fixed
+			height 80px
+			width 100% !important
+			border-bottom 1px solid var(--divider)
+			// padding-inline 40px
+			// overflow hidden
+			// contain size
+			transition height .2s !important
+			& + :global(main)
+				margin-top 80px
+				margin-left 0 !important
+
+			.button-swap
+				display unset
+
+			.content
+				max-height 100% !important
+				width 100% !important
+				padding 30px 50px !important
+				overscroll-behavior contain
+				overflow hidden
+				opacity 1
+				background var(--acrylicBg)
+				transition padding .7s cubic-bezier(.5,0,0,1)
+				> div
+					padding 0 !important
+					width 100%
+			.logo
+				> :global(svg:first-child)
+					opacity 0
+				> :global(svg:last-child)
+					opacity 1 !important
+					transform none !important
+			.extra
+				inset unset
+				bottom 0
+				width 100% !important
+				height 100vh
+				// transform none !important
+			&:target
+				height 100vh !important
+				.content
+					padding-block 10vh !important
+					overflow-y auto
+				.button-swap
+					> :first-child
+						display none
+
+					> :last-child
+						display unset
+						pointer-events all
+						// position static !important
+			.extra:target
+				position fixed
+				opacity 1
+				visibility visible
+				backdrop-filter blur(24px)
+				.content
+					transform none
+					overflow-y auto
+					padding-block 10vh !important
+
+	.madeWithIcon
+		font-size 1.25em
+
+	#astroIcon:hover
+		animation rumble 0.2s infinite linear
+
+	#stylusIcon:hover
+		animation pulsate 1.4s infinite
+
+	#heartIcon:hover
+		animation heartbeat 1.4s infinite
+</style>

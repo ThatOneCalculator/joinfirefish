@@ -1,0 +1,34 @@
+---
+import "/src/styles/skeletons.styl";
+import Widgets from "./Widgets.astro";
+import { Icon } from "astro-icon/components";
+
+const { size } = Astro.props;
+
+---
+<div class={"skeleton-container " + size} aria-hidden="true">
+  <div class="skeleton">
+    <div class="navbar">
+      <img class="avatar" alt="" />
+      <a>
+        <Icon name="ph:list-bold" color="var(--text)" />
+      </a>
+      <a class="active">
+        <Icon name="ph:house-bold" color="var(--accent)" />
+      </a>
+      <a>
+        <Icon name="ph:bell-bold" color="var(--text)" />
+      </a>
+      <a>
+        <Icon name="ph:chats-circle-bold" color="var(--text)" />
+      </a>
+      <a>
+        <Icon name="ph:stack-bold" color="var(--text)" />
+      </a>
+    </div>
+    <div class="center">
+      <slot></slot>
+    </div>
+    <Widgets></Widgets>
+  </div>
+</div>

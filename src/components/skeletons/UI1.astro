@@ -1,0 +1,62 @@
+---
+import "/src/styles/skeletons.styl";
+import Widgets from "./Widgets.astro";
+import { Icon } from "astro-icon/components";
+import { t } from "i18next"
+
+const { size } = Astro.props;
+
+---
+<div class={"skeleton-container " + size}>
+  <div class="skeleton">
+    <div class="sidebar" aria-hidden="true">
+      <img class="avatar" alt="" />
+      <a class="active">
+        <Icon name="ph:house-bold" color="var(--accent)" />
+        {!size &&
+          <span class="label">{ t("ui.home") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:bell-bold" color="var(--text)" />
+        {!size &&
+          <span class="label">{ t("ui.notifications") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:chats-circle-bold" color="var(--text)" />
+        {!size &&
+          <span class="label">{ t("ui.chats") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:compass-bold" color="var(--text)" />
+        {!size &&
+          <span class="label">{ t("ui.explore") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:bookmark-simple-bold" color="var(--text)" />
+        {!size &&
+          <span class="label">{ t("ui.bookmarks") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:magnifying-glass-bold" color="var(--text)" />
+        {!size &&
+          <span class="label">{ t("ui.search") }</span>
+        }
+      </a>
+      <a>
+        <Icon name="ph:dots-three-outline-fill" color="var(--text)"></Icon>
+        {!size &&
+          <span class="label">{ t("ui.more") }</span>
+        }
+      </a>
+    </div>
+    <div class="center">
+      <slot></slot>
+    </div>
+    <Widgets></Widgets>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+---
+const { name, desc, instanceCount } = Astro.props;
+---
+<article class="card">
+	<h3>{name}</h3>
+	<p>{desc}</p>
+	<a class="button themed" href={"#" + name}>{`${instanceCount} servers`}</a>
+</article>
+<style lang="stylus">
+	.card
+		flex-basis 250px
+		padding-bottom 3em
+		overflow hidden
+		// background none
+		box-shadow none
+		border 1px solid var(--divider)
+	h2
+		margin-bottom .2em
+	.button
+		margin-top .5em !important
+		font-size .8em
+		&::after
+			content ""
+			position absolute
+			inset -900px
+</style>

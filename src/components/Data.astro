@@ -1,0 +1,91 @@
+---
+import { t } from "i18next";
+import IconLabelButton from "./IconLabelButton.astro";
+
+const data = await fetch("https://api.fedidb.org/v1/software/firefish")
+  .then(response => response.json());
+
+const format = (num) =>
+	parseFloat(num.toFixed(2))
+		.toLocaleString()
+		.replace(/\.([0-9])$/, ".$10");
+---
+
+<div class="data">
+	<div class="card">
+		<h2 id="userCount">{format(data.user_count)}</h2>
+		<p>{t("users")}</p>
+	</div>
+	<div class="card">
+		<h2 id="mauCount">{format(data.monthly_actives)}</h2>
+		<p>{t("mau")}</p>
+	</div>
+	<div class="card">
+		<h2 id="instanceCount">{format(data.instance_count)}</h2>
+		<p>{t("servers")}</p>
+	</div>
+</div>
+<IconLabelButton classes="solid" href="https://fedidb.org/software/firefish" target="_blank">{ t("statisticsSource") }</IconLabelButton>
+
+<script async>
+	(async () => {
+		const data = await fetch("https://api.fedidb.org/v1/software/firefish")
+			.then(response => response.json());
+
+		if (!data) return;
+
+		const format = (num) =>
+			parseFloat(num.toFixed(2))
+				.toLocaleString()
+				.replace(/\.([0-9])$/, ".$10");
+
+		document.getElementById("userCount").textContent = format(data.user_count);
+		document.getElementById("mauCount").textContent = format(data.monthly_actives);
+		document.getElementById("instanceCount").textContent = format(data.instance_count);
+	})();
+</script>
+
+<style lang="stylus">
+	.data
+		display flex
+		flex-wrap wrap
+		align-self center
+		justify-content space-between
+		gap 0 1em
+		// width 200%
+		flex-grow 99
+		// margin-left -10%
+		& + :global(.label-button)
+			// position absolute
+			transform translate(2em, 0em)
+			font-size .7em
+			margin-top 6em
+			margin-bottom -3.5em
+
+	.card
+		transition opacity 0.2s;
+		padding 1em
+		padding-bottom 0
+		margin -2em -1em
+		flex 1 0 14ch
+		max-width 18ch
+		height max-content
+		color var(--fgOnAccent)
+		background var(--accentLighten) !important
+
+		h2
+			color var(--bg)
+			margin 0
+
+		for row in (1..3)
+			&:nth-child({row})
+				margin-top 1em * row
+	// .card
+	// 	flex-direction row
+	// 	justify-content center
+	// 	box-shadow none
+	// 	border 1px solid var(--divider)
+	// 	// margin 0 auto
+	// 	width 100%
+	// 	// margin-top 7rem
+</style>

@@ -1,0 +1,183 @@
+@require 'themes'
+@require 'animations'
+@require 'components'
+
+pgWidth = 90em
+:root
+	--width pgWidth
+	--radius 16px
+	--radius-med 8px
+	--radius-small 6px
+
+	--pointerX 0
+	--pointerY 0
+
+	--stickyTop 0px
+
+	// https://larsenwork.com/easing-gradients/
+	--gradient hsl(0, 0%, 0%) 0%,
+		hsla(0, 0%, 0%, 0.987) 8.1%,
+		hsla(0, 0%, 0%, 0.951) 15.5%,
+		hsla(0, 0%, 0%, 0.896) 22.5%,
+		hsla(0, 0%, 0%, 0.825) 29%,
+		hsla(0, 0%, 0%, 0.741) 35.3%,
+		hsla(0, 0%, 0%, 0.648) 41.2%,
+		hsla(0, 0%, 0%, 0.55) 47.1%,
+		hsla(0, 0%, 0%, 0.45) 52.9%,
+		hsla(0, 0%, 0%, 0.352) 58.8%,
+		hsla(0, 0%, 0%, 0.259) 64.7%,
+		hsla(0, 0%, 0%, 0.175) 71%,
+		hsla(0, 0%, 0%, 0.104) 77.5%,
+		hsla(0, 0%, 0%, 0.049) 84.5%,
+		hsla(0, 0%, 0%, 0.013) 91.9%,
+		hsla(0, 0%, 0%, 0) 100%
+
+html
+	background-color var(--bg)
+	color var(--fg)
+	line-height 1.5
+	overflow-x hidden
+	scrollbar-color var(--accent) transparent
+	scroll-padding 20vh
+	font-family "Atkinson Hyperlegible", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+	@media (prefers-reduced-motion: no-preference)
+		scroll-behavior smooth
+
+main
+	max-width 100%
+*, ::before, ::after
+	box-sizing border-box
+	scroll-padding 40px
+// 	transition background, border-color
+// 	transition-duration 0.6s
+
+h1, h2, h3
+	font-family "Nunito Variable", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+
+img
+	max-width 100%
+	border-radius var(--radius-med)
+	object-position center
+
+body
+	// max-width calc(var(--width) + 80px)
+	// margin auto
+	display flex
+	justify-content center
+	margin 0
+	@media (max-width pgWidth)
+		overflow clip
+
+	> div:first-child
+		max-width calc(var(--width) + 80px)
+		width 100%
+		display flex
+
+		> main
+			width 0
+			// margin-bottom 200px
+			flex-grow 1
+			max-width var(--width)
+			transition opacity .7s, transform 1s cubic-bezier(.2,0,0,1)
+
+.sections
+	position relative
+	min-height 500px
+	max-width 100vw
+	padding 0 40px
+	perspective 100px
+	contain layout
+
+	&::before
+		content ""
+		display block
+		position sticky
+		top 0
+		margin-inline -100vw
+		height 100vh
+		margin-bottom -100vh
+		z-index -10
+		opacity .1
+		background linear-gradient(-240deg, transparent, var(--accentDarken))
+		mask linear-gradient(to top, var(--gradient))
+		-webkit-mask @mask
+	> *
+		margin-bottom 150px
+		@media (max-width 900px)
+			margin-bottom 100px
+	> section
+		display flex
+		flex-wrap wrap
+		justify-content center
+		align-items center
+		// text-align center
+		gap 10% 0
+		> h1:first-child
+			margin-top 0
+		> h2
+			margin-bottom 1.5em
+		> div:last-child
+			position relative
+			z-index 2
+		> div:not(.card)
+			max-width calc(100% + 40px)
+		.details
+			position relative
+			// flex-grow 1
+			width 25em
+			> .posts-container
+				width 100%
+			&:only-child
+				width 600px
+		&.wide
+			text-align center
+			.chips
+				justify-content center
+
+h1
+	width 100%
+h2
+	margin 0
+	&:not(:first-child)
+		margin-top 2em
+	margin-bottom .5em
+	// font-size 1.7em
+	font-weight 800
+	color var(--accent)
+	text-shadow 0 4px 1em var(--accentTransparent)
+	width 100%
+	.highlight
+		color var(--accentLighten)
+	&.big
+		font-size 3em !important
+h3
+	font-weight 600
+	font-size 1.5em
+
+p span
+	display inline-block
+
+a
+	color var(--accent)
+	text-underline-offset .2em
+
+[astro-icon] * // make other icons match more w/ phosphor
+	stroke-width 1.5 !important
+
+@media (prefers-reduced-motion)
+	html > body#firefish
+		*, *::before, *::after
+			transition all 0s 0s, opacity .3s, background .3s !important
+			animation-duration 0s !important
+			animation-delay 0s !important
+			// transition-delay 0s !important
+
+@supports not (backdrop-filter blur())
+	#firefish
+		--acrylicBg var(--bg) !important
+@media (max-width 600px)
+	#firefish
+		--stickyTop 40px
+		--acrylicBg var(--bg) !important
+		*, *::before, *::after
+			backdrop-filter none !important

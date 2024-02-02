@@ -1,0 +1,83 @@
+---
+import Post from "./Post.astro";
+const { style, classes } = Astro.props;
+---
+
+<div class={"posts-container " + classes} style={style}>
+	<slot>
+		<div class="lined" aria-hidden="true">
+			<Post name="foxxo" at="@foxxo@foxesin.space" ticker="Foxes"></Post>
+		</div>
+	</slot>
+</div>
+
+<style lang="stylus">
+	.posts-container
+		width 35em
+		max-width 100%
+		color var(--fg)
+		padding-block 20px
+		will-change transform
+		&:not(.no-bg)
+			background var(--panel)
+			box-shadow 0 12px 100px rgba(0,0,0,0.1)
+			border-radius var(--radius)
+			border 1px solid var(--divider)
+			padding 30px 28px
+			padding 1.875em 1.75em
+		&.no-bg
+			filter drop-shadow(0 4px 8px rgba(0,0,0,0.1))
+		text-align initial
+		line-height 1.6
+		contain layout inline-size
+
+		&.small
+			padding 1.2em
+
+		:global(.avatar)
+			width 3em
+			height 3em
+		:global(img.avatar)
+			background var(--panelHighlight)
+
+		:global(.displayname)
+			font-weight 700
+			overflow hidden !important
+			text-overflow ellipsis
+		:global(.username)
+			opacity .8
+			width 0
+			flex-grow 1
+			overflow hidden !important
+			text-overflow ellipsis
+		:global(.date)
+			font-size .8em
+			font-weight 600
+			opacity .8
+		:global(.instance-ticker)
+			font-size .7em
+			margin-left .5em
+		:global(p:last-child)
+			margin-bottom 0
+		:global(.button)
+			font-size .8em
+		:global(.media)
+			margin-top 1em
+
+	.highlight-
+		&ticker
+			background var(--acrylicPanel)
+			background none
+			// margin-left -150px
+			// mask radial-gradient(ellipse at 100% 0, black 20%, rgba(0,0,0,0.1) 80%, transparent 80%);
+			mask linear-gradient(80deg, transparent 30%, black 60%)
+			-webkit-mask @mask
+			// border-bottom-left-radius 100%
+
+			:global(.avatar, .top, .username)
+				opacity 1
+				filter blur(1px)
+			:global(.instance-ticker)
+				box-shadow 0 0 60px -10px var(--accent) !important
+				z-index 10
+</style>

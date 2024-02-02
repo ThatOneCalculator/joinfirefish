@@ -1,0 +1,10 @@
+{
+  "editor.tabCompletion": "on",
+  "diffEditor.codeLens": true,
+  "i18n-ally.localesPaths": ["src/locales"],
+  "i18n-ally.keystyle": "flat",
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "gitlens.remotes": [{ "domain": "git.joinfirefish.org", "type": "GitLab" }]
+}

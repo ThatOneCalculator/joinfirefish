@@ -1,0 +1,42 @@
+---
+import i18next, { changeLanguage } from "i18next";
+import { getCollection, type CollectionEntry } from "astro:content";
+import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
+
+changeLanguage("en");
+
+export type Props = {
+    entry: CollectionEntry<"blog">;
+    entries: CollectionEntry<"blog">[];
+};
+const currentLanguage = i18next.language ?? "en";
+export async function getStaticPaths() {
+    const entries = await getCollection("blog");
+    return entries.map((entry) => {
+        const path = entry.slug;
+        return {
+            params: { slug: path },
+            props: { entry, entries },
+        };
+    });
+}
+const { entry, entries } = Astro.props;
+const entryPath = entry.id.substring(3);
+const pathsWithTranslations = new Set<string>();
+entries.forEach(({ id }) => {
+    const path = id.substring(3);
+    const hasTranslation = id.startsWith(`${currentLanguage}/`);
+    if (hasTranslation) {
+        pathsWithTranslations.add(path);
+    }
+});
+const entryLanguage = pathsWithTranslations.has(entryPath)
+    ? currentLanguage
+    : "en";
+const entryToRender = entries.find(({ id }) => id === `${entryLanguage}/${entryPath}`) ?? entry;
+const { Content } = await entryToRender.render();
+---
+
+<MarkdownPostLayout frontmatter={entryToRender.data}>
+  <Content />
+</MarkdownPostLayout>

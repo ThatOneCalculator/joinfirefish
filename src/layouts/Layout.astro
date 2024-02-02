@@ -1,0 +1,267 @@
+---
+import "/src/styles/global.styl";
+
+// Atkinson Hyperlegible - All
+import "@fontsource/atkinson-hyperlegible/400.css";
+import "@fontsource/atkinson-hyperlegible/700.css";
+import "@fontsource/atkinson-hyperlegible/400-italic.css";
+import "@fontsource/atkinson-hyperlegible/700-italic.css";
+
+// Nunito - regular weights 200-900
+import "@fontsource-variable/nunito";
+
+import { ViewTransitions } from "astro:transitions";
+import Sidebar from "../components/Sidebar.astro";
+import Footer from "../components/Footer.astro";
+import { Head } from "astro-capo";
+import { HeadHrefLangs } from "astro-i18next/components";
+
+export interface Props {
+  title: string;
+  description?: string;
+  noFooter?: boolean;
+  image?: string;
+}
+
+const { title, description, noFooter, image } = Astro.props;
+const formattedTitle = title.includes("Home")
+  ? "Firefish"
+  : `${title} | Firefish`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<Head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="keywords"
+			content="Firefish, Firefish platform, Firefish Social, FirefishSocial, Firefish List, Firefish Server List, Firefish Documentation, Firefish Instance List, Join Firefish, Firefish vs Mastodon, Firefish vs Misskey, Misskey, Misskey fork, JoinMastodon, Fediverse, Fediverse social media, top Fediverse platform, decentralized social media, ad-free social media, privacy-focused, Mastodon alternative, Mastodon"
+		/>
+		<title>{formattedTitle}</title>
+		<meta
+			name="description"
+			content={description ||
+				"A fun, new, open way to experience social media"}
+		/>
+		<meta property="og:title" content={formattedTitle} />
+		<meta
+			property="og:description"
+			content={description ||
+				"A fun, new, open way to experience social media"}
+		/>
+		<meta
+			property="og:image"
+			content={image ||
+				"https://joinfirefish.org/branding/inverse_wordmark.png"}
+		/>
+		<meta property="og:url" content="https://joinfirefish.org" />
+		<meta property="og:site_name" content="Firefish" />
+		<meta property="og:type" content={description != null ? "article" : "website"} />
+		<meta
+			name="twitter:card"
+			content={image != null ? "summary_large_image" : "summary"}
+		/>
+		<meta name="twitter:title" content={formattedTitle} />
+		<meta
+			name="twitter:description"
+			content={description ||
+				"A fun, new, open way to experience social media"}
+		/>
+		<meta
+			name="twitter:image"
+			content={image ||
+				"https://joinfirefish.org/branding/inverse_wordmark.png"}
+		/>
+		<meta
+			name="twitter:image:alt"
+			content={image != null ? "Blog header" : "Firefish logo"}
+		/>
+		<meta name="twitter:site" content="@firefish" />
+		<meta name="twitter:creator" content="@firefish" />
+		<meta name="theme-color" content="#31748f" />
+		<meta name="color-scheme" content="dark light" />
+		<!-- <HeadHrefLangs /> -->
+		<!-- <script
+			async
+			src="https://umami.calckey.org/script.js"
+			data-website-id="5bd15fa1-3b1c-4e3f-a3a3-bdcedf6260f1">
+		</script> -->
+		<ViewTransitions />
+	</Head>
+	<body id="firefish">
+		<div>
+			<Sidebar />
+			<main>
+				<slot />
+				{!noFooter && <Footer />}
+			</main>
+		</div>
+		<script>
+			const setDarkMode = () => {
+				const isDark = window.matchMedia("(prefers-color-scheme: dark)");
+				const sessionTheme = sessionStorage.getItem("theme");
+				function systemTheme(e, isInitial) {
+					if (sessionTheme != null && isInitial) {
+						document.documentElement.setAttribute("theme", sessionTheme);
+						const el = document.getElementById(sessionTheme);
+						if (el) {
+							el.checked = true;
+						}
+					} else if (e.matches) {
+						document.documentElement.setAttribute("theme", "rose-pine");
+						sessionStorage.setItem("theme", "rose-pine");
+						const el = document.getElementById("rose-pine");
+						if (el) {
+							el.checked = true;
+						}
+					} else {
+						document.documentElement.setAttribute("theme", "rose-pine-dawn");
+						sessionStorage.setItem("theme", "rose-pine-dawn");
+						const el = document.getElementById("rose-pine-dawn");
+						if (el) {
+							el.checked = true;
+						}
+					}
+				}
+				isDark.addEventListener("change", systemTheme);
+				systemTheme(isDark, true);
+			}
+			setDarkMode();
+			document.addEventListener("astro:after-swap", setDarkMode);
+
+			const setThemeButtons = () => {
+				const themeButtons = document.querySelectorAll("[name='theme']");
+				themeButtons.forEach((input) => {
+					input.addEventListener("click", () => {
+						sessionStorage.setItem("theme", input.getAttribute("id"));
+						document.documentElement.setAttribute("theme", input.getAttribute("id"));
+					});
+				});
+			}
+			setThemeButtons();
+			document.addEventListener("astro:after-swap", setThemeButtons);
+		</script>
+		<script>
+			import { gsap } from "gsap";
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+			gsap.registerPlugin(ScrollTrigger);
+
+			gsap.matchMedia().add(
+				{
+					isDesktop: "(min-width: 1000px)",
+					reduceMotion: "(prefers-reduced-motion: reduce)",
+				},
+				(context) => {
+					let { isDesktop, reduceMotion } = context.conditions;
+					if (isDesktop) {
+						gsap.utils.toArray(".cards").forEach((cards) => {
+							gsap.to(
+								".cards:not(.compact) .card:not(:nth-child(2)), .cards.compact .card",
+								{
+									scrollTrigger: {
+										trigger: cards,
+										scrub: true,
+									},
+									y: 50,
+								}
+							);
+							gsap.to(
+								".cards:not(.compact) .card:nth-child(2), .card.split > div:last-child, .cards > .column:nth-child(2)",
+								{
+									scrollTrigger: {
+										trigger: cards,
+										scrub: true,
+									},
+									y: -50,
+								}
+							);
+						});
+					}
+				}
+			);
+
+			gsap.matchMedia().add("(max-width: 1200px)", () => {
+				gsap.utils
+					.toArray(".sticky-section > .details")
+					.forEach((detail) => {
+						gsap.to(detail, {
+							scrollTrigger: {
+								trigger: detail,
+								scrub: true,
+								start: "top top",
+								end: "top -300px",
+							},
+							opacity: 0.2,
+							scale: 0.95,
+							ease: "power2.inOut",
+						});
+					});
+			});
+
+			gsap.matchMedia().add(
+				"(prefers-reduced-motion: no-preference)",
+				() => {
+					gsap.utils
+						.toArray("section > .vertical-list .posts-container")
+						.forEach((post) => {
+							gsap.fromTo(
+								post,
+								{
+									y: 50,
+									opacity: 0,
+								},
+								{
+									scrollTrigger: {
+										trigger: post,
+										scrub: 1,
+									},
+									y: -100,
+									opacity: 1.7,
+								}
+							);
+						});
+					gsap.utils
+						.toArray(".parallax-section")
+						.forEach((section) => {
+							gsap.fromTo(
+								section.querySelectorAll(".behind")[0],
+								{
+									y: "-100%",
+									opacity: 1,
+								},
+								{
+									scrollTrigger: {
+										trigger: section,
+										scrub: true,
+										start: "top bottom",
+										end: "bottom top",
+									},
+									y: "0%",
+									opacity: 0,
+								}
+							);
+						});
+					// gsap.utils.toArray(".sticky-section").forEach(section => {
+					// 	gsap.to(section, {
+					// 		scrollTrigger: {
+					// 			trigger: section,
+					// 			scrub: true,
+					// 			start: "bottom 50%"
+					// 		},
+					// 		opacity: 0,
+					// 	})
+					// });
+				}
+			);
+
+			document.addEventListener("resize", () => {
+				ScrollTrigger.refresh();
+			});
+		</script>
+	</body>
+</html>

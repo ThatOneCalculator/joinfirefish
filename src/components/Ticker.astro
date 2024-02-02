@@ -1,0 +1,33 @@
+---
+const { icon } = Astro.props;
+---
+<span class="instance-ticker">
+	{icon ?
+		<img class="icon" src={icon} />
+		:
+		<div class="icon"></div>
+	}
+	<slot></slot>
+</span>
+<style lang="stylus">
+	.instance-ticker
+		background var(--accentDarken)
+		display inline-flex
+		align-items center
+		height 2em
+		justify-self flex-end
+		padding .2em .5em
+		padding-left .4em
+		border-radius 100px
+		font-size .8em
+		color white
+		// text-shadow -1px -1px 0 var(--bg),1px -1px 0 var(--bg),-1px 1px 0 var(--bg),1px 1px 0 var(--bg)
+		overflow hidden
+		font-weight 700
+		> .icon
+			height 1.4em
+			width @height
+			border-radius 100px
+			margin-right .4em
+			background var(--accentLighten)
+</style>

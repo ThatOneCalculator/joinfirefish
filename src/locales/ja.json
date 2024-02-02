@@ -1,0 +1,231 @@
+{
+	"languages": "言語 (Languages)",
+	"flyin": {
+		"1": "楽しくて新しい、オープンな",
+		"2": "ソーシャルメディア",
+		"3": "コミュニティ",
+		"4": "コミュニケーション",
+		"5": "つながり"
+	},
+	"ui": {
+		"home": "タイムライン",
+		"notifications": "通知",
+		"chats": "チャット",
+		"explore": "みつける",
+		"bookmarks": "お気に入り",
+		"search": "検索",
+		"more": "もっと！"
+	},
+	"sidebar": {
+		"home": "ホーム",
+		"serverList": "サーバーリスト",
+		"blog": "ブログ",
+		"docs": "ドキュメント",
+		"apps": "アプリ",
+		"contact": "お問い合わせ",
+		"about": "Firefishについて",
+		"merch": "グッズストア",
+		"sourceCode": "ソースコード"
+	},
+	"readMore": "続きを読む",
+	"community": "あなたのコミュニティ",
+	"communitySub": {
+		"0": "つながるひろがるコミュニティ、\nタイムラインはあなたが決める。",
+		"1": "中央集権に縛られず、好きなコミュニティに参加したり、自分で作ることもできます。",
+		"2": "Discord、Twitter、Facebookなどのプラットフォームとは違い、ここではすべてがオープンです。しつこいトラッキングもよく分からないアルゴリズムもありません。"
+	},
+	"posts": {
+		"poll": {
+			"q": "みんなに質問！一番好きな動物は？",
+			"a1": "キツネ",
+			"a2": "ネコ",
+			"a3": "イヌ",
+			"a4": "トリ",
+			"a5": "トカゲ"
+		},
+		"cw": {
+			"caption": "内緒ですよ……",
+			"chars": "(1200文字)",
+			"button": "もっと見る"
+		},
+		"quote": "見て見て、こんな可愛い魚見つけちゃった！",
+		"mfm": {
+			"1": "Flavored Markdown",
+			"2": "(mfm) を使って",
+			"3": "様々な",
+			"4": "表現ができます。例えば",
+			"5": "アニメーションや、",
+			"6": "ブラー、",
+			"7": "他にも",
+			"8": "いろいろ！"
+		},
+		"stream": "配信始まるよ、来てね！",
+		"podcast": {
+			"1": "ポッドキャストで新しいエピソードを公開しました",
+			"2": "エピソードを再生"
+		},
+		"blog": "なぜキツネは完璧な動物なのか、それは……",
+		"blogReply": "うん、僕もそう思う。"
+	},
+	"chooseColor": "好きな色も作れます！",
+	"express": "もっと自分らしく",
+	"expressSub": "基本はマイクロブログ、でも色々なことができるようにしました。",
+	"media": "メディア",
+	"polls": "投票",
+	"quotePosts": "引用投稿",
+	"imageDescriptions": "画像説明 (ALT)",
+	"contentWarnings": "内容を隠す",
+	"customEmojis": "カスタム絵文字",
+	"hashtags": "ハッシュタグ",
+	"emojiReactions": "絵文字リアクション",
+	"markdown": "Markdown",
+	"animations": "アニメーション",
+	"threadedReplies": "返信のスレッド表示",
+	"andMore": "他にも",
+	"followRequests": "フォローリクエスト",
+	"accountMigration": "アカウント引っ越し",
+	"chats": "チャット",
+	"groups": "グループ",
+	"bookmarks": "お気に入り",
+	"channels": "チャンネル",
+	"filters": "フィルター",
+	"fullTextSearch": "全文検索",
+	"pages": "ページ",
+	"statusBars": "ステータスバー",
+	"dataExport": "インポートとエクスポート",
+	"plugins": "プラグイン",
+	"api": "API",
+	"webhooks": "Webhook",
+	"catMode": "猫モード",
+
+	"stayAlert": "見逃さない",
+	"stayAlertSub": "アンテナで特定の単語やハッシュタグを拾うタイムラインを作れます",
+
+	"customizable": "カスタマイズ",
+	"customizableSub": "お好きなUIでどうぞ",
+
+	"atAGlance": "ウィジェット",
+	"atAGlanceSub": "たくさんのウィジェットでもっと便利に",
+
+	"stickyNotes": "付箋",
+	"notifications": "通知",
+	"timelines": "タイムライン",
+	"calendar": "カレンダー",
+	"rss": "RSS",
+	"trends": "トレンド",
+	"activity": "アクティビティ",
+	"clocks": "時計",
+	"images": "画像",
+	"charts": "チャート",
+	"more": "などなど",
+
+	"connected": {
+		"1": "繋がり広がる",
+		"2": "",
+		"3": "プラットフォームに囚われず",
+		"4": "一つの場所からやり取りできます。"
+	},
+
+	"ap": {
+		"1": "Firefishは",
+		"2": "で他のFediverseプラットフォームと繋がります。例えば",
+		"3": "など…"
+	},
+
+	"getStarted": {
+		"1": "あなたのコミュニティを見つけよう",
+		"2": "好きなサーバーに参加して、Firefishを始めましょう！",
+		"3": "サーバーリスト",
+		"4": "自分で作る"
+	},
+
+	"appsSub": "FirefishはPWAで全プラットフォームをサポートしていますが、サードパーティアプリもあります！公式モバイルアプリも製作中です😉",
+
+	"comparison": {
+		"title": "Fediverseソフトウェア比較表",
+		"1": "リッチテキスト",
+		"2": "チャット",
+		"3": "引っ越し",
+		"4": "検索",
+		"5": "引用投稿",
+		"6": "絵文字リアクション",
+		"7": "投稿の編集",
+		"8": "スレッド表示",
+		"9": "フォロー・フォロワー数取得",
+		"10": "ロール",
+		"11": "グループ",
+		"12": "モバイルアプリ",
+		"13": "Mastodon API"
+	},
+
+	"faq": "FAQ",
+	"faqLipsum": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi minima vero alias incidunt explicabo, voluptates quaerat dignissimos esse. Iure labore sit corporis fuga a reprehenderit neque ducimus asperiores explicabo ut.",
+	"faqQuestion1": "FirefishはMastodonですか？",
+	"faqAnswer1": {
+		"part1": "いいえ。Firefishは日本で生まれたソフトウェアである",
+		"part2": "のフォークで、同じくActivityPubを使い様々なソフトウェアと通信できます。Firefishのプログラム自体はMastodonと何の関係もありません。多くのMastodonクライアントでFirefishにもログインすることができますが、使える機能に制限があります。"
+	},
+	"faqQuestion2": "サーバーとはなんですか？",
+	"faqAnswer2": "",
+	"faqQuestion3": "連合や非中央集権とはなんですか？",
+	"faqAnswer3": "",
+
+	"all": "すべて",
+	"explore": "見つける",
+
+	"servers": "サーバー",
+	"users": "ユーザー",
+	"mau": "月間アクティブ数",
+
+	"join": {
+		"title": "サーバーに参加しよう",
+		"sub1": "各サーバーは、それぞれ無所属の個人により運営されています。",
+		"sub2": "各サーバーは",
+		"sub3": "独自のルールや",
+		"sub4": "モデレーション、",
+		"sub5": "そして",
+		"sub6": "独自の資源で運営されます。",
+		"post1": "どのサーバーに参加してもFediverseの様々な人たちと繋がれます！",
+		"post2": "",
+		"post3": "どのサーバーがいいか、あまり真剣に悩む必要はありません。あなたはアカウントとフォロワーを他のFirefishサーバー、あるいはサポートしている他のFediverseプラットフォームにいつでも移行することができます。",
+		"post4": "",
+		"post5": "",
+		"safety": "セーフティ",
+		"safetySub": "このリストはすべてのサーバーを網羅しているわけではなく、非公式サーバーのコンテンツを承認したりモデレーションするものでもありません。",
+		"categories": "カテゴリー",
+		"notInterested": "気になるサーバーがありませんか？",
+		"createOwn": "自分のサーバーでコミュニティを作ることもできます。",
+		"learn": "セルフホストについて"
+	},
+
+	"contact": {
+		"title": "お問い合わせ",
+		"description": "なにかお困りですか？私達の活動について話したい？良いアイデアを思いついたり、バグを見つけたりしましたか？なにかご提案をお持ちですか？それともただチャットしたい？大歓迎です！",
+		"fediverse": "お知らせ・アップデート情報",
+		"email": "アウトリーチ・秘密の質問・専門的なお問い合わせ・責任情報開示",
+		"gitea": "不具合報告・新機能のリクエスト",
+		"matrix": "コミュニティサポート・一般的な質問・チャット",
+		"opencollective": "寄付・特別サポート・スポンサー・イベント"
+	},
+	"about": "Firefishについて",
+	"aboutSub": "FirefishはMisskeyのフォークです。情熱的なチームより開発されており、コミュニティに耳を傾け、人々がハッピーになれるよう全力を注いでいます。",
+	"branding": {
+		"title": "ブランディング",
+		"ourBrand": "ブランドデザイン",
+		"backgroundColors": "バックグラウンドカラー",
+		"accentColors": "アクセントカラー",
+		"fullLogo": "ロゴ",
+		"icons": "アイコン",
+		"colorsComeFrom1": "すべてのカラーは",
+		"colorsComeFrom2": "プロジェクトから採用しています"
+	},
+	"maintainers": "メンテナー",
+
+	"stack": "技術スタック",
+	"stackSub": "Firefishは以下のオープンソース技術を使用しています",
+	"universal": "Universal",
+	"backend": "Backend",
+	"frontend": "Frontend",
+	"testing": "Testing",
+	"website": "Website"
+}

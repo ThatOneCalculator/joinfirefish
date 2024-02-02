@@ -1,0 +1,161 @@
+---
+import Layout from "./Layout.astro";
+import Hero from "../components/Hero.astro";
+import Mention from "../components/Mention.astro";
+import IconLabelButton from "../components/IconLabelButton.astro";
+import { getCollection } from "astro:content";
+const allBlogs = await getCollection("blog");
+const allDocs = await getCollection("docs");
+
+// const date = new Date().getFullYear().toString();
+
+const { frontmatter } = Astro.props;
+
+let customImageUrl: any = null;
+if (frontmatter.image != null && frontmatter.image.url != null) {
+	customImageUrl = `https://joinfirefish.org${frontmatter.image.url}`;
+}
+---
+
+<Layout
+	title={frontmatter.title}
+	description={frontmatter.description || null}
+	image={customImageUrl}
+>
+	<Hero>
+		<h2>{frontmatter.title}</h2>
+		<p>{frontmatter.description}</p>
+		{
+			frontmatter.pubDate && (
+				<p style="font-size: 0.9em">
+					{frontmatter.pubDate.toString().slice(0, 10)}
+				</p>
+			)
+		}
+		<p>
+			<Mention>{frontmatter.author}</Mention>
+		</p>
+	</Hero>
+	<div class="flex">
+		<div class="article">
+			{
+				frontmatter.image && (
+					<img
+						src={frontmatter.image.url}
+						alt={frontmatter.image.alt}
+						class="header"
+					/>
+				)
+			}
+			<slot />
+		</div>
+		<aside>
+			<h2>Blog</h2>
+			<hr />
+			{
+				allBlogs.map((blogPost) => (
+					<IconLabelButton
+						sub={blogPost.data.pubDate.toDateString()}
+						href={`/blog/${blogPost.slug}`}
+					>
+						{blogPost.data.title}
+					</IconLabelButton>
+				))
+			}
+			<br /><br />
+			<h2>Docs</h2>
+			<hr />
+			{
+				allDocs.map((docPage) => (
+					<IconLabelButton href={`/docs/${docPage.slug}`}>
+						{docPage.data.title}
+					</IconLabelButton>
+				))
+			}
+		</aside>
+	</div>
+</Layout>
+<style lang="stylus">
+  :global(#hero)
+    min-height 600px
+	.flex
+		margin-top -5.5rem
+		z-index 2
+		gap 40px
+		@media (min-width 600px)
+			position relative
+			margin-inline 50px
+	aside
+		flex-grow 1
+		width 12em
+		margin-inline 40px
+
+	.article
+		width 50em
+		max-width 100%
+		box-shadow 0px 8px 48px rgba(0,0,0,0.05)
+		padding 0.5em 1.5em
+		background var(--panel)
+		border-radius var(--radius)
+		margin-top -80px
+		// margin-bottom 10px
+		z-index 2
+		position relative
+		font-size 18px
+		line-height 1.6
+		> *
+			max-width 100%
+
+		:global(pre)
+			overflow-x auto
+			background var(--X11)
+			padding 1em
+			border 1px solid var(--divider)
+			border-radius var(--radius-small)
+
+		:global(h1, h2, h3, h4, h5, h6)
+			// all initial !important
+			color inherit !important
+			text-shadow none
+			font-weight 700
+		:global(h1)
+			font-size 2em
+		:global(h3)
+			font-size 1.2em
+
+		:global(p)
+			max-width 90%
+
+		:global(blockquote)
+			border-left 4px solid var(--accent)
+			background var(--accentedBg)
+			border-radius 10px
+			margin 1.5em 10px
+			padding 0.5em 1em
+			box-shadow 0 0px 30px var(--accentTransparent)
+
+		:global(blockquote > p)
+			display inline
+
+		:global(.rose-pine) {
+			background-color #191724 !important
+		}
+
+		:global(.custom-code-block) {
+			border solid 8px var(--border)
+			border-radius 24px
+			font-size 14px
+		}
+
+		.header
+			--mask linear-gradient(to bottom,
+				rgba(0,0,0, 1) 0,   rgba(0,0,0, 1) 40%,
+				rgba(0,0,0, 0) 95%, rgba(0,0,0, 0) 0
+			) 100% 50% / 100% 100% repeat-x;
+			font 2em/1.6em Arial;
+			-webkit-mask var(--mask);
+			mask var(--mask);
+			object-fit cover;
+			width 100%;
+			height 300px;
+</style>

@@ -1,0 +1,49 @@
+---
+const { icon, href } = Astro.props;
+import { Icon } from "astro-icon/components";
+
+const Element = icon ? "a" : "span"
+
+---
+
+<Element href={href} target="_blank">
+	{icon &&
+		<Icon name={icon} class="icon"/>
+	}
+	<slot class="slot"></slot>
+</Element>
+
+<style lang="stylus">
+	.icon
+		margin-right 0.3em
+	a, span
+		position relative
+		display inline-flex
+		align-items center
+		font-weight 600
+		padding 0em .5em
+		margin-left 0.5em
+		font-size .9em
+		line-height 2
+		vertical-align -.1em
+		text-decoration none
+		isolation isolate
+		color var(--accent)
+		width max-content
+		:global(h3) > &
+			font-size .7em !important
+			margin-inline .2em
+			vertical-align .1em
+		&::before
+			content ""
+			position absolute
+			inset .2em 0
+			border-radius var(--radius)
+			background var(--accent)
+			opacity .15
+			z-index -1
+			transition opacity .1s
+		&:hover:before, &:focus:before
+			opacity .2
+
+</style>

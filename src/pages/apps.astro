@@ -1,0 +1,102 @@
+---
+import { t, changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import ImageCard from "../components/ImageCard.astro";
+import RadioTabs from "../components/RadioTabs.astro";
+
+changeLanguage("en");
+
+const devices = [
+    "All",
+    "iOS",
+    "Android",
+    "Windows",
+    "macOS",
+    "Linux",
+];
+---
+<Layout title="Apps" noFooter="true">
+	<Hero>
+		<h1>Apps</h1>
+		<p>{ t("appsSub") }</p>
+	</Hero>
+	<div class="sections">
+		<div>
+			<RadioTabs options={devices} name="devices"></RadioTabs>
+			<div class="flex gap">
+				<ImageCard
+					name="Kaiteki"
+					img="/images/apps/kaiteki_screenshot.avif"
+					icon="https://kaiteki.app/img/kaiteki-64x.png"
+					platforms={["Android", "Linux", "Windows"]}
+					href="https://kaiteki.app/"
+				></ImageCard>
+				<ImageCard
+					name="SoraSNS"
+					img="/images/apps/sorasns_screenshot.avif"
+					icon="/images/apps/sorasns_icon.avif"
+					platforms={["iOS"]}
+					href="https://www.mszpro.com/sorasns/"
+				></ImageCard>
+
+				<ImageCard
+					name="Milktea"
+					img="/images/apps/milktea_screenshot.avif"
+					icon="/images/apps/milktea_icon.avif"
+					platforms={["Android"]}
+					href="https://play.google.com/store/apps/details?id=jp.panta.misskeyandroidclient"
+				></ImageCard>
+				<ImageCard
+					name="Kimis"
+					img="/images/apps/kimis_screenshot.avif"
+					icon="/images/apps/kimis_icon.avif"
+					platforms={["iOS", "macOS"]}
+					href="https://apps.apple.com/us/app/kimis-a-client-for-misskey/id1667275125"
+				></ImageCard>
+				<ImageCard
+					name="Fedistar"
+					img="/images/apps/fedistar_screenshot.webp"
+					icon="/images/apps/fedistar_icon.webp"
+					platforms={["Linux", "Windows", "macOS"]}
+					href="https://fedistar.net/"
+				></ImageCard>
+				<ImageCard
+					name="Whalebird"
+					img="/images/apps/whalebird_screenshot.webp"
+					icon="/images/apps/whalebird_icon.avif"
+					platforms={["Linux", "Windows", "macOS"]}
+					href="https://whalebird.social/"
+				></ImageCard>
+			</div>
+		</div>
+	</div>
+</Layout>
+<style lang="stylus">
+	devices = All Windows macOS Linux Android iOS Web
+
+	// warn(devices)
+
+	for item in devices
+		:global(input[id={item}]:checked)
+			& ~ div
+				:global(article:not([class*={item}]))
+					display none
+
+
+	.sections
+		margin-top -2em !important
+		text-align right
+		/.flex
+			text-align left
+	// for item in devices
+	// 	:global(input[id={item}]:checked)
+	// 		& ~ .sections
+	// 			:global(article:not([class*={item}])
+	// 				display none
+
+</style>
+
+<script>
+	document.getElementById("All").checked = true
+</script>

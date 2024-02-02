@@ -1,0 +1,130 @@
+---
+const themes = [
+	["rose-pine", "#191724", "#c4a7e7"],
+	["rose-pine-dawn", "#faf4ed", "#286983"],
+	["frappe", "#292c3c", "#f2d5cf"],
+	["cherry", "#FEF6F7", "#FF5975"],
+	["astro", "#232125", "#81C08B"],
+	["coffee", "#F5F3F3", "#9F8B89"],
+	// ["rose-pine-moon", "#232136", "#c4a7e7"],
+	["mocha", "#11111b", "#f2d7cd"],
+	["nord", "#2e3440", "#81a1c1"],
+	["gruvbox", "#282828", "#98971A"],
+]
+---
+<script is:inline>
+	const sessionTheme = sessionStorage.getItem("theme");
+	console.log(sessionTheme);
+	const setSessionTheme = () => {
+		document.getElementById(sessionTheme).checked = true;
+	}
+	if (sessionTheme != null) {
+		document.documentElement.setAttribute("theme", sessionTheme);
+		document.addEventListener("DOMContentLoaded", setSessionTheme);
+	}
+	setSessionTheme();
+	document.addEventListener("astro:after-swap", setSessionTheme);
+	document.addEventListener("astro:page-load", setSessionTheme);
+</script>
+<fieldset class="theme-selector" transition:persist>
+	<legend class="hide">Choose A Theme</legend>
+
+	{themes.map((theme) => (
+		<div>
+			<input type="radio" name="theme" id={theme[0]} class={theme[0]} />
+			<label style={`background-color: ${theme[1]};  color: ${theme[2]}`} for={theme[0]}>
+				{theme[0].replaceAll("-", " ").replace("rose", "rosé")}
+			</label>
+		</div>
+	))}
+</fieldset>
+<style lang="stylus">
+fieldset
+	all unset
+	display flex
+	flex-wrap wrap
+	justify-content center
+	gap 1em
+	margin-bottom 1em
+	contain strict
+	height 112px
+	padding 10px
+	overflow hidden
+	margin-inline -40px
+	padding-inline 40px
+	scroll-padding 40px
+	// margin-right -900px
+
+fieldset::-webkit-scrollbar
+	display none
+
+div
+	position relative
+
+input
+	margin 0
+	position absolute
+	top 1px
+	left 1px
+	transition inset .2s
+	accent-color var(--accent)
+
+label
+	display block
+	border-radius 24px
+	padding 0 1.4em
+	height 48px
+	min-width 48px
+	max-width 48px
+	line-height 48px
+	font-weight 700
+	white-space nowrap
+	font-size 0
+	text-transform capitalize
+	border 2px solid currentColor
+	transition transform .4s cubic-bezier(0,0,0,1.7), border-radius .4s cubic-bezier(0,0,0,2)
+	&::after
+		content ""
+		position absolute
+		// inset 12px
+		// border-radius 100px
+		// border 2px solid currentColor
+		// border-right-color currentColor
+		// border-bottom-color currentColor
+		// transform rotate(45deg)
+		transform-origin left center
+		inset 0
+		left 50%
+		background currentColor
+		border-radius inherit
+		border-top-left-radius 0
+		border-bottom-left-radius 0
+		transition border-radius .2s
+		// border 4px solid currentColor
+		// border-radius 0 100px 100px 0
+
+input:hover + label, input:focus + label
+	border-radius var(--radius)
+
+input:hover, input:focus
+	top -2px
+	left -2px
+
+input:checked
+	top -2px
+	left 0
+
+input:checked + label
+	font-size 1em
+	border-radius var(--radius)
+	max-width 300px
+	// margin-inline 8px
+	box-shadow 0 0 24px -10px var(--accent)
+	&::after
+		content unset
+
+input:not(:checked) + label:active
+	transform scale(.9)
+	transition transform .4s
+
+</style>

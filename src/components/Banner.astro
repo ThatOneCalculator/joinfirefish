@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+import IconLabelButton from "./IconLabelButton.astro";
+import { t } from "i18next";
+
+const { href } = Astro.props;
+---
+<div class="banner">
+	<IconLabelButton classes="solid themed" icon="ph:speaker-high" href={href}>
+		<!-- <Icon name="ph:megaphone-simple" class="flip"></Icon> -->
+		<slot></slot>
+		<span>{ t("readMore") } &gt;&gt;</span>
+	</IconLabelButton>
+</div>
+<style lang="stylus">
+	.banner
+		// width 100%
+		// margin-left auto
+		display flex
+		align-items center
+		margin-top auto
+		// font-size .9em !important
+		span
+			// color var(--fgOnAccent) !important
+			// color inherit
+			text-decoration underline
+			text-underline-offset .4em
+			font-weight 800
+		// justify-content flex-end
+		// > div
+		// 	position relative
+		// 	width max-content
+		// 	max-width 100%
+		// 	// min-width 30%
+		// 	border-radius var(--radius-small)
+		// 	border-radius 100px
+		// 	// background var(--panelHighlight)
+		// 	// background var(--accent)
+		// 	// color white
+		// 	// color var(--fgOnAccent)
+		// 	// color var(--accentDarken)
+		// 	text-shadow 0 4px 40px rgba(0,0,0,1), 0 4px 40px rgba(0,0,0,1)
+		// 	font-weight 700
+		// 	padding .4em 1.2em
+		// 	color var(--fgOnAccent)
+		// 	background var(--accentLighten) !important
+		// 	// padding-left 1em
+		// 	// overflow hidden
+		// 	// border 1px solid var(--divider)
+		// 	border-bottom px solid var(--divider)
+		// 	// border-left 4px solid var(--accent)
+		// 	// box-shadow 0 0 24px -6px var(--accentTransparent)
+		// 	> :global(svg)
+		// 		margin-right .5em
+		// 	> a
+		// 		margin-left 1em
+		// 		color inherit
+		// 		text-underline-offset .4em
+		// 		font-size .8em
+		// 		&::before
+		// 			content ""
+		// 			position absolute
+		// 			inset 0
+		// 			opacity 0
+		// 			transition opacity .2s
+		// 	&:hover, &:focus-within
+		// 		// color var(--accentLighten)
+		// 		// outline 2px solid var(--accent)
+		// 		// outline-offset 12px
+		// 		a
+		// 			opacity 1
+		// 		a::before
+		// 			opacity 1
+
+
+</style>

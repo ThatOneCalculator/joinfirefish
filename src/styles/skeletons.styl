@@ -1,0 +1,235 @@
+random(a,b)
+	return math(math(0, 'random')*(b - a + 1) + a, 'floor')
+
+.skeleton-container
+	position relative
+	width 100%
+	padding-top 56.25%
+	perspective 100px
+	.skeleton
+		position absolute
+		inset 0
+		display flex
+		contain layout style paint
+		border 1px solid var(--divider)
+		border-radius var(--radius)
+		background var(--bg)
+		contain strict
+		// font-size 100%
+		box-shadow 0 12px 48px rgba(0,0,0,0.1)
+		// font-size 16px
+
+		.sidebar, .skeleton-widgets
+			width 11em
+		.skeleton-widgets
+			border 0
+			border-left 1px solid var(--divider)
+			border-radius 0
+		.sidebar
+			background var(--navBg)
+			box-sizing border-box
+			padding 20px 15px
+			padding 1.5em 1em
+			> img
+				display block
+				margin-inline auto
+				margin-bottom 20px
+				border-radius 30%
+				width 25%
+				padding-bottom @width
+				height 0
+			> a
+				width 100%
+				display block
+				padding 12px 15px
+				padding .5em .8em
+				display flex
+				align-items center
+				gap .7em
+				border-radius 100px
+				min-width 40%
+				transition background .4s, transform .2s
+				> *
+					transition transform 1s
+				svg
+					height 1em
+					min-width 1em
+
+				for row in (1..10)
+					&:nth-child({row})::after
+						width random(100, row) + "%"
+
+				> span
+					font-size .75em
+					color var(--navFg)
+					opacity .8
+					font-weight bold
+
+				&::after
+					// flex-grow 1
+					height .4em
+					// width 40%
+
+				&.active, &:hover
+					background var(--accentedBg)
+					span
+						opacity 1
+						color inherit
+					&::after
+						background var(--accent)
+						opacity 1
+				&:hover
+					transform scale(1.05)
+					filter drop-shadow(2px 4px 24px var(--accent))
+					> *
+						transform scale(1.1) translate(-2px, -2px)
+						transition transform .05s
+					> span
+						transform scale(1.05) translate(-2px, -1.5px)
+
+		.center
+			display flex
+			align-items center
+			justify-content center
+			flex-direction column
+			padding 5%
+			width 50%
+			flex-grow 1
+			font-weight 700
+			color var(--accent)
+	&.small .skeleton
+		font-size .7em
+		.sidebar svg
+			display none
+		.sidebar, .skeleton-widgets
+			// width 35%
+			// flex-grow
+			width unset
+			flex-grow 5
+			max-width 10em
+			min-width 5em
+		.sidebar a
+			&::after
+				content ""
+				min-width 60%
+				height .5em
+				background var(--navFg)
+				opacity .8
+				border-radius 100px
+				mask linear-gradient(to right, black, rgba(0,0,0,0.8))
+				-webkit-mask @mask
+				transition opacity .2s, background .2s
+		.clock > div:first-child
+			display none
+		.center
+			font-size 1.5em
+		.widget
+			&:hover
+				.lines:not(.header), ::before, ::after
+					transform scale(1.01) translate(-.5px,-.5px) !important
+
+	.columns
+		display flex
+		flex-grow 3
+		width 100%
+		.skeleton-widgets
+			width 100% !important
+			max-width unset !important
+			border 0
+		> div
+			width 20%
+			flex-grow 1
+			border-left 1px solid var(--divider)
+		p
+			margin-bottom 0
+			color var(--accent)
+			font-weight 800
+
+.skeleton-container, .skeleton-widgets
+	.header
+		position relative
+		min-height 26px
+		background var(--panelHeaderBg)
+		border-bottom solid .5px var(--panelHeaderDivider)
+		display flex
+		justify-content space-between
+		padding 10px 12px
+		padding-top 11px
+		&::after
+			width 10%
+
+.skeleton-widgets
+	border-left 1px solid var(--divider)
+	padding 10px
+	background var(--acrylicBg)
+	border-radius var(--radius)
+	border 1px solid var(--divider)
+	max-width 300px
+	.widget
+		background var(--panel)
+		border-radius var(--radius-med)
+		min-height 5em
+		margin-bottom 1em
+		overflow hidden
+		transition transform .2s, background .7s
+		.lines:not(.header), ::before, ::after
+			transition transform 1s
+		.skeleton-container:not(.small) &:hover
+			transform scale(1.02) translate(-1px,-2px)
+			.lines:not(.header), ::before, ::after
+				transform scale(1.01) translate(-2px,-2px)
+				filter drop-shadow(2px 4px 4px var(--accentDarken))
+				transition transform .05s
+		&.clock
+			display flex
+			align-items center
+			padding 1em
+			gap 1em
+			min-height unset
+			> :first-child
+				// flex-grow 1
+				background var(--accent)
+				height 2.5em
+				width @height
+				border-radius 40%
+				opacity .5
+			> :last-child
+				display flex
+				flex-direction column
+				align-content center
+				gap .8em
+				flex-grow 2
+
+		&:last-child
+			min-height 900px
+
+
+
+
+.lines
+	position relative
+	display flex
+	justify-content space-between
+	width 100%
+	min-height 4px
+	gap 10%
+	&::before, &::after
+		content ""
+		background var(--accent)
+		border-radius 100px
+		flex-grow 1
+		mask linear-gradient(to right, black, rgba(0,0,0,0.8))
+		-webkit-mask @mask
+	for row in (1..3)
+		&:nth-last-child({row})
+			&::before
+				flex-grow 1.5 * row
+	&:nth-child(even)::after
+		flex-grow 5
+
+.small .skeleton
+	&-widgets, .sidebar
+		for row in (1..8)
+			& > :nth-child({row})
+				animation fadeUp .7s (.1s * row) backwards cubic-bezier(0,0,0,1)
+				transition-delay .05s * row

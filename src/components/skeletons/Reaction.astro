@@ -1,0 +1,91 @@
+---
+const { e } = Astro.props;
+---
+<footer id="reaction" class="reactions" aria-hidden="true">
+	<button data-reaction-button tabindex="-1">
+		{e ?
+			<img class="emoji" alt="" src={`/images/emojis/${e}.avif`} aria-label="none"/>
+			:
+			<slot></slot>
+
+		}
+		<span>{Math.round(Math.random() * 20) + 1}</span>
+	</button>
+</footer>
+<script>
+	const reactions = document.querySelectorAll("[data-reaction-button]");
+	reactions.forEach((reaction) => {
+		const span = reaction.getElementsByTagName("span")[0];
+		let num = Number(span.innerHTML);
+		reaction.addEventListener("click", () => {
+			if (num > 998) {
+				span.innerHTML = "999+";
+			} else {
+				num += 1
+				span.innerHTML = num.toString();
+			}
+		});
+
+		let time = 1;
+		function increment() {
+			time = Math.random() * 10;
+			num += 1
+			setTimeout(()=> {
+				if (num > 998) {
+					span.innerHTML = "999+";
+				} else {
+					span.innerHTML = num.toString();
+					increment();
+				}
+			}, 1000 * time)
+		}
+		increment();
+
+	});
+</script>
+<style lang="stylus">
+	:global(.reactions)
+		display flex
+		// flex-wrap wrap
+		gap 10px
+		margin-top .5em
+	button
+		all unset
+		position relative
+		height 2.2em
+		padding-inline 10px
+		background rgba(0,0,0,.05)
+		background var(--buttonBg)
+		// background var(--accentTransparent)
+		border-radius 4px
+		cursor pointer
+		user-select none
+		overflow hidden
+		min-width max-content
+		// &::before
+		// 	// content ""
+		// 	position absolute
+		// 	inset 0
+		// 	background var(--accent)
+		// 	opacity .1
+		&, img
+			transition transform .4s cubic-bezier(0,0,0,5), background .2s
+		img
+			height 1.25em !important
+			vertical-align -.25em
+			transform none !important
+		span
+			font-size: .75em;
+			line-height: 32px;
+			margin: 0 0 0 4px;
+			font-weight 600
+			transition opacity .2s
+		&:hover, &:focus
+			background rgba(0,0,0,.1)
+		&:active
+			transform scale(.98)
+			transition transform .2s cubic-bezier(0,0,0,1)
+		&:active img
+			transform scale(.9) !important
+			transition transform .4s cubic-bezier(0,0.5,0,1)
+</style>

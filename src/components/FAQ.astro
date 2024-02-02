@@ -1,0 +1,59 @@
+---
+const { q } = Astro.props;
+---
+<details>
+	<summary>{q}</summary>
+	<div>
+		<slot></slot>
+	</div>
+</details>
+<style lang="stylus">
+	details
+		display block
+		width 100%
+		// background var(--X11)
+		// border 1px solid var(--divider)
+		margin-block .7em
+		text-align left
+		border-radius var(--radius-small)
+		transition margin .2s cubic-bezier(0,0,0,1.2)
+		border 1px solid transparent
+		transition padding .2s cubic-bezier(0,1,0,1), border .2s
+		summary
+			// display block
+			// width max-content
+			max-width 100%
+			border-radius var(--radius-small)
+			padding .7em 1em
+			margin 0em
+			background var(--panel)
+			position sticky
+			border 1px solid var(--divider)
+			top 1em
+			// font-size 1.1em
+			transition background .2s, margin .4s, transform .4s cubic-bezier(0,0,0,1.2)
+			color var(--accent)
+			font-weight 700
+			&:active
+				transform scale(.99)
+		> div
+			// padding 1em
+			color var(--fg)
+			font-size .95em
+			animation slideDownFrom .4s .1s backwards cubic-bezier(0,1,0,1.2)
+		&[open]
+			margin-block 1em
+			border-color var(--divider)
+			padding 1em
+			summary
+				margin-bottom .7em
+				border-color transparent
+		// &:first-of-type
+		// 	border-radius var(--radius) var(--radius) 0 0
+		// &:last-of-type
+		// 	border-radius 0 0 var(--radius) var(--radius)
+		&:hover, &:focus-within
+			summary
+				background var(--panelHighlight)
+
+</style>

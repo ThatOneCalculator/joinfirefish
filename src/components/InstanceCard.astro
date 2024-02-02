@@ -1,0 +1,284 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro-preload/components";
+import Mention from "./Mention.astro";
+import { t } from "i18next";
+import { slide } from "astro:transitions";
+
+let { name, description } = Astro.props;
+const { icon, verified, userCount, url, version, banner, nsfw } =
+  Astro.props;
+name = name ? name : url;
+description = description
+  ? description
+  : "Could not retrieve this instance's information.";
+
+const articleClass = `card instance ${verified ? "highlighted" : ""} ${nsfw ? "_mfm_blur_" : ""}`;
+const beta = version && version.includes("beta");
+const dev = version && version.includes("dev");
+const id = url.replace(/[^a-zA-Z]+/g, "");
+const format = (num) =>
+  parseFloat(num.toFixed(2))
+    .toLocaleString()
+    .replace(/\.([0-9])$/, ".$10");
+const isValidUrl = (urlString) => {
+  try {
+    return Boolean(new URL(urlString));
+  } catch {
+    return false;
+  }
+};
+---
+
+<script define:vars={{ url, id }} async>
+(async () => {
+	const format = (num) =>
+		parseFloat(num.toFixed(2))
+			.toLocaleString()
+			.replace(/\.([0-9])$/, ".$10");
+
+	const data = await fetch(`https://${url}/api/stats`, {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+			"User-Agent": "FirefishOrg/0.1.0; +https://joinfirefish.org/join",
+		},
+	}).then((response) => response.json());
+	if (!data) return;
+
+	document.getElementById(id).textContent = format(data.originalUsersCount);
+})();
+</script>
+
+<article class={articleClass} transition:animate={slide({ easing: 'easeInOut', duration: '0.6s' })}>
+  <div class="media themed" aria-hidden="true">
+    {
+      banner &&
+        isValidUrl(banner) &&
+        !banner.includes("1200x630") &&
+        !banner.includes("undefined") && (
+          <Image
+            url={encodeURI(banner)}
+            alt=""
+            aria-label="none"
+            height="480"
+            width="640"
+            loading="lazy"
+          />
+        )
+    }
+  </div>
+  <div>
+    <h4>{name}</h4>
+    <p>{description}</p>
+    <footer class="flex gap small" style="gap: 0.4em 0.4em">
+      {
+        (
+          <span class="tag">
+            <Icon name="ph:user-circle-bold" />
+            <span id={id}>{userCount ? format(userCount) : "..."}</span>{" "}
+            {t("users")}
+          </span>
+        )
+      }
+      {
+        verified && (
+          <span class="tag has-tooltip">
+            <Icon name="ph:circle-wavy-check-fill" />
+            {t("verified")}
+            <Icon name="ph:info-fill" />
+            <span class="tooltip">{t("verifiedSub")}</span>
+          </span>
+        )
+      }
+      {beta && <span class="tag">{t("beta")}</span>}
+      {dev && <span class="tag">{t("dev")}</span>}
+    </footer>
+    <div>
+      {
+        isValidUrl(icon) &&
+        !icon.includes("icon.png") &&
+        !icon.includes("1200x630") &&
+        !icon.includes("undefined") ? (
+          <Image
+            url={encodeURI(icon)}
+            alt=""
+            aria-label="none"
+            loading="lazy"
+            height="128"
+            width="128"
+            aria-hidden="true"
+          />
+        ) : (
+          <img
+            src={icon}
+            alt=""
+            aria-label="none"
+            loading="lazy"
+            height="128"
+            width="128"
+            aria-hidden="true"
+          />
+        )
+      }
+      <a
+        class="button"
+        id="joinButton"
+        href={`https://${url}`}
+        rel="me"
+        target="_blank"
+        data-umami-event={`View Server ${url}`}>{t("view")}</a
+      >
+    </div>
+  </div>
+</article>
+<style lang="stylus">
+	.highlighted
+		// filter drop-shadow(0 0 6px var(--focus))
+		// border 2px solid var(--accent) !important
+		// box-shadow 0 4px 4px var(--focus)
+		// --panel var(--accent)
+		h4, p
+			color var(--accentLighten) !important
+		p
+			font-weight 600
+		> div:last-child
+			&::before
+				content ""
+				position absolute
+				inset 0
+				background linear-gradient(45deg,var(--accentLighten), transparent)
+				z-index -1
+				opacity .1
+
+	.card
+		padding 0
+		// padding-bottom 1em
+		background var(--panel)
+		border 1px solid var(--divider)
+		// box-shadow none
+		margin 0
+		text-align unset
+		justify-content unset
+		overflow hidden
+		max-width 350px
+		transition transform .2s cubic-bezier(0,0,0,1)
+		border-radius var(--radius-med)
+		&:hover, &:focus-within
+			--panel var(--panelHighlight) !important
+			// transform translateY(-2px)
+		.media
+			border-radius 0
+			// border-radius var(--radius)
+			margin-bottom 0
+			box-shadow none
+			padding-bottom 50%
+			border-bottom 1px solid var(--divider)
+		h4
+			margin 0
+			font-size 1.1em
+			margin-bottom .4em
+			color var(--fg)
+		p
+			overflow hidden
+			font-size .85em
+			color var(--fg)
+			margin 0
+			margin-top -.25em
+			// margin-bottom .7em
+			// opacity .9
+			&:empty
+				display none
+
+		.count
+			// position absolute
+			// top 10px
+			// right 10px
+			display flex
+			align-items center
+			padding .4em .7em
+			font-size .7em
+			background var(--accentDarken)
+			background var(--buttonBg)
+			color var(--fg)
+			border-radius var(--radius-small)
+			font-weight 600
+			// text-shadow 0 0 24px rgba(0,0,0,1)
+			// box-shadow 0 4px 12px rgba(0,0,0,0.4)
+			svg
+				margin-right .2em
+		.button
+			font-size .8em
+			padding .5em 1.2em
+			color var(--fg)
+			// background var(--accent)
+			// color var(--fgOnAccent)
+			// margin-top -2px
+			border-radius var(--radius-med)
+			// border 4px solid var(--panel)
+			// width 100%
+
+			&:hover, &:focus
+				color var(--accent)
+
+			&::after
+				content ""
+				position absolute
+				inset -900px
+				z-index 2
+		footer
+			margin-top auto
+			padding-top .5em
+			// border-top 1px solid var(--divider)
+			// .label
+			// 	display flex
+			// 	align-items center
+			// 	font-size .8em
+			// 	margin-right .2em
+			// 	font-weight 800
+			// 	svg
+			// 		margin-right .2em
+			// 		height 1.2em
+		> div:last-child
+			position relative
+			display flex
+			flex-direction column
+			flex-grow 1
+			background var(--panel)
+			padding 1em
+			z-index 2
+			transition background .2s
+			// margin-top calc(0px - var(--radius))
+			// border-radius var(--radius)
+			> div
+				position relative
+				display flex
+				justify-content flex-end
+				align-items flex-end
+				margin-top -1.5em
+				margin-inline -4px
+				margin-bottom .5em
+				order -1
+				gap 1em
+				> img
+					position absolute
+					left 0
+					bottom -4px
+					width 3.5em
+					height 3.5em
+					padding 4px
+					background var(--panel)
+					border 4px solid var(--panel)
+					border-radius 30%
+					transition background .2s
+				> *
+					position relative
+					&::before
+						content ""
+						position absolute
+						inset -4px
+						background var(--panel)
+						z-index -1
+						border-radius inherit
+</style>

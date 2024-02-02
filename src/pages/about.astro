@@ -1,0 +1,446 @@
+---
+import { t, changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Logo from "../components/brand/Logo.astro";
+import AboutItem from "../components/AboutItem.astro";
+import PostContainer from "../components/skeletons/PostContainer.astro";
+import Post from "../components/skeletons/Post.astro";
+import IconLabelButton from "../components/IconLabelButton.astro";
+import PostReply from "../components/skeletons/PostReply.astro";
+import Mention from "../components/Mention.astro";
+
+changeLanguage("en");
+---
+<Layout title="About">
+	<Hero>
+		<Logo width="150" transition:name="logo"></Logo>
+		<h1 style="font-size: 2.5em;">{ t("about") }</h1>
+		<p>{ t("aboutSub") }</p>
+		<div class="flex">
+			<IconLabelButton href="#brand">{ t("branding.title") }</IconLabelButton>
+			<IconLabelButton href="#stack">{ t("stack") }</IconLabelButton>
+		</div>
+	</Hero>
+	<div class="sections">
+		<section>
+			<h1 class="header">{ t("maintainers") }</h1>
+			<div class="flex centered">
+				<AboutItem
+					name="Kainoa Kanter"
+					role="Founder\nLead Developer"
+					avatar="/images/profiles/kainoa.avif"
+					isProfile="true"
+					href="https://firefish.social/@kainoa"
+				/>
+				<AboutItem
+					name="Naskya"
+					role="Fullstack Developer"
+					avatar="/images/profiles/naskya.avif"
+					isProfile="true"
+					href="https://post.naskya.net/@dev"
+				/>
+				<AboutItem
+					name="Namekuji"
+					role="Backend Developer"
+					avatar="/images/profiles/nmkj.webp"
+					isProfile="true"
+					href="https://firefish.social/@namekuji"
+				/>
+				<!-- <AboutItem
+					name="April John"
+					role="Backend Developer"
+					avatar="/images/profiles/cleo.avif"
+					isProfile="true"
+					href="https://firefish.social/@april"
+				/> -->
+				<AboutItem
+					name="Freeplay"
+					role="Frontend Developer\nUI Design"
+					avatar="/images/profiles/freeplay.avif"
+					isProfile="true"
+					href="https://firefish.social/@freeplay"
+				/>
+				<AboutItem
+					name="Panos Damelos"
+					role="Project Coordinator\nCommunity Manager"
+					avatar="/images/profiles/panos.avif"
+					isProfile="true"
+					href="https://firefish.social/@panos"
+				/>
+			</div>
+		</section>
+		<section class="sticky-section" id="brand">
+			<div class="" style="width: 470px; max-width: 100%">
+				<h2 class="big" style="padding-bottom: 20px">{ t("branding.ourBrand") }</h2>
+				<PostContainer classes="no-bg">
+					<PostReply readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@firefish@firefish.social" ticker="Firefish">
+						<p>{ t("branding.backgroundColors") }</p>
+						<div class="media ratio">
+							<div class="grid">
+								<div class="color" style="background-color: #1f1d2e;">
+									<h2>Dark</h2>
+									<p>#1f1d2e</p>
+								</div>
+								<div class="color inverse" style="background-color: #faf4ed;">
+									<h2>Dawn</h2>
+									<p>#faf4ed</p>
+								</div>
+							</div>
+						</div>
+					</PostReply>
+					<PostReply readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@firefish@firefish.social" ticker="Firefish">
+						<p>{ t("branding.accentColors") }</p>
+						<div class="media ratio">
+							<div class="grid">
+								<div class="color inverse" style="background-color: #c4a7e7;">
+									<h2>Iris</h2>
+									<p>#c4a7e7</p>
+								</div>
+								<div class="color inverse" style="background-color: #eb6f92;">
+									<h2>Love</h2>
+									<p>#eb6f92</p>
+								</div>
+								<div class="color inverse" style="background-color: #f6c177;">
+									<h2>Gold</h2>
+									<p>#f6c177</p>
+								</div>
+								<div class="color inverse" style="background-color: #ebbcba;">
+									<h2>Rose</h2>
+									<p>#ebbcba</p>
+								</div>
+							</div>
+						</div>
+					</PostReply>
+					<Post icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@firefish@firefish.social" ticker="Firefish">
+						<p>{ t("branding.logoComeFrom") } <Mention href="https://www.blackspike.com/" icon="blackspike">blackspike design</Mention>!</p>
+						<p>{ t("branding.colorsComeFrom1") } <Mention href="https://rosepinetheme.com/" icon="rosepine">Rosé Pine</Mention> { t("branding.colorsComeFrom2") }</p>
+					</Post>
+				</PostContainer>
+			</div>
+			<div class="vertical-list">
+				<PostContainer>
+					<PostReply readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@firefish@firefish.social" ticker="Firefish">
+						<p>{ t("branding.fullLogo") }</p>
+						<div class="media ratio">
+							<div class="grid">
+								<div>
+									<img src="/branding/title.svg"/>
+									<div class="flex">
+										<IconLabelButton href="/branding/title.svg" icon="ph:download" download={true}>SVG</IconLabelButton>
+										<IconLabelButton href="/branding/title.png" icon="ph:download" download={true}>PNG</IconLabelButton>
+									</div>
+								</div>
+							</div>
+						</div>
+					</PostReply>
+					<Post readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@firefish@firefish.social" ticker="Firefish">
+						<p>{ t("branding.icons") }</p>
+						<div class="media ratio">
+							<div class="grid">
+								<div>
+									<img src="/branding/wordmark.svg"/>
+									<div class="flex" style="flex-wrap: nowrap !important">
+										<IconLabelButton href="/branding/wordmark.svg" icon="ph:download" download={true}>SVG</IconLabelButton>
+										<IconLabelButton href="/branding/wordmark.png" icon="ph:download" download={true}>PNG</IconLabelButton>
+									</div>
+								</div>
+								<div>
+									<img src="/branding/inverse_wordmark.svg"/>
+									<div class="flex" style="flex-wrap: nowrap !important">
+										<IconLabelButton href="/branding/inverse_wordmark.svg" icon="ph:download" download={true}>SVG</IconLabelButton>
+										<IconLabelButton href="/branding/inverse_wordmark.png" icon="ph:download" download={true}>PNG</IconLabelButton>
+									</div>
+								</div>
+							</div>
+						</div>
+					</Post>
+				</PostContainer>
+			</div>
+		</section>
+        <section id="stack">
+			<h1 class="header">{ t("stack") }</h1>
+			<p class="desc">{ t("stackSub") }</p>
+			<h2 class="sub">{ t("universal") }</h2>
+			<div class="flex centered">
+				<AboutItem
+					name="TypeScript"
+					role="Main Language"
+					avatar="/images/stack/typescript.svg"
+					href="https://www.typescriptlang.org/"
+				/>
+				<AboutItem
+					name="ActivityPub"
+					role="Protocol"
+					avatar="/images/stack/activitypub.svg"
+					href="https://activitypub.rocks/"
+				/>
+				<AboutItem
+					name="PNPM"
+					role="Package manager"
+					avatar="/images/stack/pnpm.svg"
+					href="https://pnpm.io/"
+				/>
+				<AboutItem
+					name="Biome"
+					role="Linter"
+					avatar="/images/stack/biome.svg"
+					href="https://biomejs.dev/"
+				/>
+				<AboutItem
+					name="Gitlab"
+					role="Git"
+					avatar="/images/contact/gitlab.svg"
+					href="https://git.joinfirefish.org/firefish/"
+				/>
+				<AboutItem
+					name="Docker"
+					role="Containerization"
+					avatar="/images/stack/docker.avif"
+					href="https://hub.docker.com/r/thatonecalculator/firefish/"
+				/>
+				<AboutItem
+					name="Weblate"
+					role="Translation"
+					avatar="/images/stack/weblate.svg"
+					href="https://hosted.weblate.org/engage/firefish/"
+				/>
+				<AboutItem
+					name="YAML"
+					role="Configuration"
+					avatar="/images/stack/yaml.svg"
+					href="https://yaml.org/"
+				/>
+			</div>
+			<h2 class="sub">{ t("backend") }</h2>
+			<div class="flex centered">
+				<AboutItem
+					name="Node.js"
+					role="Runtime"
+					avatar="/images/stack/node.avif"
+					href="https://nodejs.org/"
+				/>
+				<AboutItem
+					name="Koa"
+					role="Web Framework"
+					avatar="/images/stack/koa.avif"
+					href="https://koajs.com/"
+				/>
+				<AboutItem
+					name="PostgreSQL"
+					role="Database"
+					avatar="/images/stack/postgres.svg"
+					href="https://www.postgresql.org/"
+				/>
+				<AboutItem
+					name="Redis"
+					role="Cache"
+					avatar="/images/stack/redis.avif"
+					href="https://redis.io/"
+				/>
+				<AboutItem
+					name="Rust"
+					role="Compiled algorithms"
+					avatar="/images/stack/rust.avif"
+					href="https://www.rust-lang.org/"
+				/>
+				<AboutItem
+					name="Napi"
+					role="Rust Bindings"
+					avatar="/images/stack/napi.avif"
+					href="https://napi.rs/"
+				/>
+				<AboutItem
+					name="Pug"
+					role="SSR Templating"
+					avatar="/images/stack/pug.svg"
+					href="https://pugjs.org/"
+				/>
+				<AboutItem
+					name="SWC"
+					role="Bundler"
+					avatar="/images/stack/swc.avif"
+					href="https://swc.rs/"
+				/>
+				<AboutItem
+					name="Bull"
+					role="Queue"
+					avatar="/images/stack/bull.avif"
+					href="https://optimalbits.github.io/bull/"
+				/>
+				<AboutItem
+					name="TensorFlow"
+					role="Machine Learning"
+					avatar="/images/stack/tensorflow.avif"
+					href="https://www.tensorflow.org/"
+				/>
+				<AboutItem
+					name="TypeORM"
+					role="Database ORM"
+					avatar="/images/stack/typeorm.avif"
+					href="https://typeorm.io/"
+				/>
+				<AboutItem
+					name="Mocha"
+					role="Testing"
+					avatar="/images/stack/mocha.svg"
+					href="https://mochajs.org/"
+				/>
+			</div>
+			<h2 class="sub">{ t("frontend") }</h2>
+			<div class="flex centered">
+				<AboutItem
+					name="Vue.js"
+					role="Framework"
+					avatar="/images/stack/vue.svg"
+					href="https://vuejs.org/"
+				/>
+				<AboutItem
+					name="Vite"
+					role="Bundler"
+					avatar="/images/stack/vite.avif"
+					href="https://vitejs.dev/"
+				/>
+				<AboutItem
+					name="SCSS"
+					role="Styles"
+					avatar="/images/stack/sass.svg"
+					href="https://sass-lang.com/"
+				/>
+				<AboutItem
+					name="Rosé Pine"
+					role="Theming"
+					avatar="/images/stack/rosepine.avif"
+					href="https://rosepinetheme.com/"
+				/>
+				<!-- ONCE MOBILE APPS LAUNCH -->
+				<!-- <AboutItem
+					name="Capacitor"
+					role="Mobile Apps"
+					avatar="/images/stack/capacitor.svg"
+					href="https://capacitorjs.com/"
+				/> -->
+				<AboutItem
+					name="AiScript"
+					role="Plugins and Scripting"
+					avatar="/images/stack/aiscript.svg"
+					href="https://github.com/syuilo/aiscript/"
+				/>
+				<AboutItem
+					name="Phosphor"
+					role="Icons"
+					avatar="/images/stack/phosphor.svg"
+					href="https://phosphoricons.com/"
+				/>
+				<AboutItem
+					name="SwiperJS"
+					role="Mobile UI"
+					avatar="/images/stack/swiper.svg"
+					href="https://swiperjs.com/"
+				/>
+				<AboutItem
+					name="Plyr"
+					role="Media Player"
+					avatar="/images/stack/plyr.avif"
+					href="https://plyr.io/"
+				/>
+				<AboutItem
+					name="GSAP"
+					role="Animations"
+					avatar="/images/stack/greensock.avif"
+					href="https://greensock.com/gsap/"
+				/>
+				<AboutItem
+					name="Twemoji"
+					role="Emojis"
+					avatar="/images/stack/twemoji.svg"
+					href="https://github.com/discord/twemoji/"
+				/>
+				<AboutItem
+					name="ChartJS"
+					role="Charts"
+					avatar="/images/stack/chartjs.svg"
+					href="https://www.chartjs.org/"
+				/>
+				<AboutItem
+					name="Cypress"
+					role="E2E Testing"
+					avatar="/images/stack/cypress.svg"
+					href="https://cypress.io/"
+				/>
+			</div>
+			<h2 class="sub">{ t("website") }</h2>
+			<div class="flex centered">
+				<AboutItem
+					name="Astro"
+					role="Framework"
+					avatar="/images/stack/astro.avif"
+					href="https://astro.build/"
+				/>
+				<AboutItem
+					name="Stylus"
+					role="Styles"
+					avatar="/images/stack/stylus.svg"
+					href="https://stylus-lang.com/"
+				/>
+				<AboutItem
+					name="GSAP"
+					role="Animations"
+					avatar="/images/stack/greensock.avif"
+					href="https://greensock.com/gsap/"
+				/>
+				<!-- <AboutItem
+					name="Umami"
+					role="Analytics"
+					avatar="/images/stack/umami.svg"
+					href="https://umami.is/"
+				/> -->
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style lang="stylus">
+	.header
+		text-align center
+		margin-top 2em
+		margin-bottom 1em
+		font-size 3em
+	.desc
+		text-align center
+		margin-bottom 2em
+		font-size 1.4em
+		color: var(--accentLighten)
+	.sub
+		text-align center
+		font-size 2em
+		margin-bottom 0
+
+	.inverse
+		color var(--bg) !important
+	.color
+		flex-grow 1
+		padding 1em 1.4em !important
+		display inline !important
+		color white
+		// --bg #e0def4
+		// border-radius var(--radius)
+		// border 4px solid currentColor !important
+		h2
+			color unset
+			margin 0
+			font-size 1.4em
+		p
+			font-weight 800
+			margin 0 !important
+
+	.media.content > .content
+		display unset
+		text-align center
+		// filter drop-shadow(0 12px 24px rgba(0,0,0,0.4))
+		transform rotateY(calc(.4deg * var(--pointerX))) rotateX(calc(-.4deg * var(--pointerY))) translate( calc( 4px * var(--pointerX) ), calc( 4px * var(--pointerY) ) )
+		img
+			// max-width unset
+			width 120%
+
+</style>

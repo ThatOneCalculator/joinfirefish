@@ -1,0 +1,106 @@
+---
+import { t, changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import AboutItem from "../components/AboutItem.astro";
+
+changeLanguage("en");
+---
+
+<Layout title="Contact">
+  <Hero>
+    <h1>{t("contact.title")}</h1>
+    <p>{t("contact.description")}</p>
+  </Hero>
+
+  <div class="sections">
+    <section>
+			<div class="flex centered">
+        <AboutItem
+          name="Email"
+          role={t("contact.email")}
+          avatar="/images/contact/email.avif"
+          href="mailto:info@firefish.social"
+        />
+				<AboutItem
+					name="Fediverse"
+					role={t("contact.fediverse")}
+					avatar="/images/contact/fediverse.svg"
+					href="https://fedi.software/@firefish"
+				/>
+        <AboutItem
+					name="Gitlab"
+					role={t("contact.gitea")}
+					avatar="/images/contact/gitlab.svg"
+					href="https://git.joinfirefish.org/firefish/firefish/issues"
+				/>
+        <AboutItem
+					name="Matrix"
+					role={t("contact.matrix")}
+					avatar="/images/contact/matrix.svg"
+					href="https://matrix.to/#/#firefish:matrix.fedibird.com"
+				/>
+        <AboutItem
+          name="OpenCollective"
+          role={t("contact.opencollective")}
+          avatar="/images/contact/opencollective.svg"
+          href="https://opencollective.com/firefish"
+        />
+			</div>
+		</section>
+    <!-- <section class="cards compact">
+      <div class="card">
+        <img src="/images/contact/fediverse.svg" />
+        <h2>
+          <a href="https://fedi.software/@firefish" target="_blank">Fediverse</a>
+        </h2>
+        <p>{t("contact.fediverse")}</p>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img src="/images/contact/email.avif" />
+          <h2>
+              <a href="mailto:info@joinfirefish.org" target="_blank">Email</a></h2>
+          <p>{t("contact.email")}</p>
+        </div>
+        <div class="card">
+          <img src="/images/contact/codeberg.svg" />
+          <h2>
+            <a href="https://git.joinfirefish.org/firefish/firefish/issues">Codeberg</a>
+          </h2>
+          <p>{t("contact.gitea")}</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="/images/contact/matrix.svg" />
+        <h2>
+          <a href="https://matrix.to/#/#firefish:matrix.fedibird.com" target="_blank">Matrix</a>
+        </h2>
+      </h2>
+      <p>{t("contact.matrix")}</p>
+      </div>
+    </section> -->
+  </div>
+
+  <section>
+  </section>
+  <section>
+  </section>
+  <section>
+  </section>
+  <section>
+    <h2>
+  </section>
+</Layout>
+
+<style lang="stylus">
+    section
+        margin-bottom 2em
+        padding 1em
+    h2
+        display flex
+        align-items center
+        img
+            height 1em
+            margin-right 0.5em
+</style>

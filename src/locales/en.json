@@ -1,0 +1,252 @@
+{
+	"languages": "Languages",
+	"flyin": {
+		"1": "A fun, new, open way to experience",
+		"2": "social media",
+		"3": "communities",
+		"4": "communication",
+		"5": "connectivity"
+	},
+	"ui": {
+		"home": "Home",
+		"notifications": "Notifications",
+		"chats": "Chats",
+		"explore": "Explore",
+		"bookmarks": "Bookmarks",
+		"search": "Search",
+		"more": "More!"
+	},
+	"sidebar": {
+		"home": "Home",
+		"serverList": "Join",
+		"blog": "Blog",
+		"docs": "Docs",
+		"apps": "Apps",
+		"contact": "Contact",
+		"about": "About",
+		"merch": "Merch",
+		"sourceCode": "Source Code"
+	},
+	"readMore": "Read More",
+	"community": "Your Community",
+	"communitySub": {
+		"0": "Part of an interconnected network of communities,\nwhere you are in charge of your feed.",
+		"1": "Not controlled by a centralized force, you can be in charge of your own communtiy, or join one of the many that fits you.",
+		"2": "Unlike platforms like Discord, Twitter, and Facebook, there's no invasive tracking or black-box algorithms, and we're transparent about everything."
+	},
+	"posts": {
+		"poll": {
+			"q": "Hey everyone, what's the best animal?",
+			"a1": "Fox",
+			"a2": "Cat",
+			"a3": "Dog",
+			"a4": "Bird",
+			"a5": "Lizard"
+		},
+		"cw": {
+			"caption": "Hidden Secrets...",
+			"chars": "(1200 characters)",
+			"button": "Show content",
+			"content": "Boo!!!"
+		},
+		"quote": "Everyone, look at this cute fish I found!",
+		"mfm": {
+			"1": "Flavored Markdown",
+			"2": "(mfm) allows you to do",
+			"3": "many",
+			"4": "cool things, such as",
+			"5": "animations, ",
+			"6": "blurred text, ",
+			"7": "and ",
+			"8": "more!"
+		},
+		"stream": "Stream starting, come join!",
+		"podcast": {
+			"1": "New podcast episode out now",
+			"2": "Play Episode"
+		},
+		"blog": "Why Foxes Are The Perfect Animal...",
+		"blogReply": "Yep, I can agree with that."
+	},
+	"chooseColor": "Or choose your own colors!",
+	"express": "Express Yourself",
+	"expressSub": "Firefish supports the basic micro-blogging features,\nwith added ways of creating a fun experience.",
+	"media": "Media",
+	"polls": "Polls",
+	"quotePosts": "Quote posts",
+	"imageDescriptions": "Image descriptions",
+	"contentWarnings": "Content warnings",
+	"customEmojis": "Custom emojis",
+	"hashtags": "Hashtags",
+	"emojiReactions": "Emoji reactions",
+	"markdown": "Markdown",
+	"animations": "Animations",
+	"threadedReplies": "Threaded replies",
+	"andMore": "And More",
+	"followRequests": "Follow requests",
+	"accountMigration": "Account migration",
+	"chats": "Chats",
+	"groups": "Groups",
+	"bookmarks": "Bookmarks",
+	"channels": "Channels",
+	"filters": "Filters",
+	"fullTextSearch": "Full-text search",
+	"pages": "Pages",
+	"statusBars": "Status bars",
+	"dataExport": "Data import and export",
+	"plugins": "Plugins",
+	"api": "API",
+	"webhooks": "Webhooks",
+	"catMode": "Cat mode",
+
+	"stayAlert": "Stay Alert",
+	"stayAlertSub": "Specified words & hashtags in categorized feeds with Antennas",
+
+	"customizable": "Customizable",
+	"customizableSub": "Build The UI For You",
+
+	"atAGlance": "At A Glance",
+	"atAGlanceSub": "With many widgets to choose from",
+
+	"stickyNotes": "Sticky notes",
+	"notifications": "Notifications",
+	"timelines": "Timelines",
+	"calendar": "Calendar",
+	"rss": "RSS",
+	"trends": "Trends",
+	"activity": "Activity",
+	"clocks": "Clocks",
+	"images": "Images",
+	"charts": "Charts",
+	"more": "More",
+
+	"connected": {
+		"1": "Connected",
+		"2": "to the",
+		"3": "Cross-website socialization.",
+		"4": "All in one place."
+	},
+
+	"ap": {
+		"1": "All possible with",
+		"2": "and the other Fediverse platforms that support it, like",
+		"3": "and more..."
+	},
+
+	"getStarted": {
+		"1": "Find Your Community",
+		"2": "Find the perfect server for you to join and get started with Firefish now!",
+		"3": "Server List",
+		"4": "Create Your Own",
+		"getStarted": "Get Started",
+		"learnMore": "Learn More"
+	},
+
+	"appsSub": "While we offer a great PWA that works on all platforms, there's also third-party apps that work with Firefish too! Our own mobile app is coming soon 😉",
+
+	"comparison": {
+		"title": "Fediverse Software Comparison",
+		"description": "This chart may be incomplete or outdated, and is not meant to be a comprehensive list of all features.",
+		"complete": "complete",
+		"partial": "partial",
+		"enhanced": "enhanced",
+		"1": "Rich posts",
+		"2": "Chatting",
+		"3": "Migration",
+		"4": "Search",
+		"5": "Quote posts",
+		"6": "Emoji reacts",
+		"7": "Post edits",
+		"8": "Deep threads",
+		"9": "Profile backfilling",
+		"10": "Roles",
+		"11": "Groups",
+		"12": "Mastodon API",
+		"13": "Link verification"
+	},
+
+	"faq": "FAQ",
+	"faqLipsum": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi minima vero alias incidunt explicabo, voluptates quaerat dignissimos esse. Iure labore sit corporis fuga a reprehenderit neque ducimus asperiores explicabo ut.",
+	"faqQuestion1": "Is Firefish Mastodon?",
+	"faqAnswer1": {
+		"part1": "No. Firefish is actually a fork of the Japanese software ",
+		"part2": ", which uses the ActivityPub standard to communicate across multiple different pieces of software. Firefish is in no way related to Mastodon in its codebase. You are able to sign into Firefish from most of your favorite Mastodon clients, but functionality will be limited."
+	},
+	"faqQuestion2": "What is a server?",
+	"faqAnswer2": "",
+	"faqQuestion3": "What is federation & decentralization?",
+	"faqAnswer3": "",
+
+	"all": "All",
+	"explore": "Explore",
+
+	"servers": "Servers",
+	"users": "Users",
+	"mau": "Active Monthly",
+
+	"join": {
+		"title": "Join a Server",
+		"sub1": "Each server is run on its own by an unaffiliated individual or group.",
+		"sub2": "Each with their",
+		"sub3": "own rules,",
+		"sub4": "moderation,",
+		"sub5": "and",
+		"sub6": "resources.",
+		"sub7": "Find the one that's right for you, or join our flagship server,",
+		"sub8": "Firefish Social!",
+		"post1": "No matter what server you join,",
+		"post2": "you can still connect with those across the Fediverse!",
+		"post3": "Don't worry too much about what server you choose.",
+		"post4": "You can always migrate your account and followers",
+		"post5": "to another Firefish server, or even another supported Fediverse platform later!",
+		"safety": "Safety",
+		"safetySub1": "This is not a comprehensive list of all servers, nor do we approve or moderate any content on non-verified servers. However, there are a",
+		"safetySub2": "set of guidelines",
+		"safetySub3": "each server has to follow.",
+		"categories": "Categories",
+		"notInterested": "Not finding a server that interests you?",
+		"createOwn": "Create your own server to host your community.",
+		"learn": "Learn how to self-host",
+		"submit": "Submit your server!",
+		"flagship": "Join Firefish Social"
+	},
+
+	"statisticsSource": "Statistics from FediDB",
+
+	"beta": "Beta",
+	"dev": "Alpha",
+	"view": "View",
+	"verified": "Verified",
+	"verifiedSub": "Officially operated by the Firefish developers.",
+
+	"contact": {
+		"title": "Contact Us",
+		"description": "Have questions, comments, or concerns? Want to talk about what we do? Have a great idea or found a bug? Have a proposal for us? Just want to chat? We'd love to hear from you!",
+		"fediverse": "Community accouncements & updates",
+		"email": "Outreach, private questions, professional inquiries, & responsible disclosure",
+		"gitea": "Bug reports & feature requests",
+		"matrix": "Community support, general questions, & chatting",
+		"opencollective": "Donations, premium support, sponsorship, & events"
+	},
+	"about": "About",
+	"aboutSub": "Forked from Misskey and made by a passionate team of developers, Firefish is all about listening to its community and making people happy with great software.",
+	"branding": {
+		"title": "Branding",
+		"ourBrand": "Our Brand",
+		"backgroundColors": "Background Colors",
+		"accentColors": "Accent Colors",
+		"fullLogo": "Full Logo",
+		"icons": "Icons",
+		"colorsComeFrom1": "All our colors come from the",
+		"colorsComeFrom2": "project!",
+		"logoComeFrom": "Our logo comes from"
+	},
+	"maintainers": "Maintainers",
+
+	"stack": "Stack",
+	"stackSub": "Firefish is built on top of the following open-source technologies:",
+	"universal": "Universal",
+	"backend": "Backend",
+	"frontend": "Frontend",
+	"website": "Website"
+}

@@ -1,0 +1,264 @@
+---
+import { Icon } from "astro-icon/components";
+import { t } from "i18next";
+---
+<div class="table-container">
+  <h3>{ t("comparison.title") }</h3>
+  <p>{ t("comparison.description")}</p>
+  <p>
+    <Icon name="ph:circle-bold" /> = { t("comparison.complete") },
+    <Icon name="ph:circle-dashed-bold"/> = { t("comparison.partial") },
+    <Icon name="ph:radio-button-bold" /> = { t("comparison.enhanced") }
+  </p>
+  <table class="customTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Firefish</th>
+          <th><a target="_blank" href="https://joinmastodon.org">Mastodon</a></th>
+          <th><a target="_blank" href="https://misskey-hub.net">Misskey</a></th>
+          <th><a target="_blank" href="https://pleroma.social">Pleroma</a></th>
+          <th><a target="_blank" href="https://akkoma.social">Akkoma</a></th>
+          <th><a target="_blank" href="https://join-lemmy.org/">Lemmy</a></th>
+          <th><a target="_blank" href="https://pixelfed.org">Pixelfed</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{ t("comparison.1") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.2") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.3") }</td>
+          <td><Icon name="ph:radio-button-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.4") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.5") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.6") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.7") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.8") }</td>
+          <td><Icon name="ph:radio-button-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.9") }</td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.10") }</td>
+          <td></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.11") }</td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+          <td></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.12") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-dashed-bold"/></td>
+        </tr>
+        <tr>
+          <td>{ t("comparison.13") }</td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td><Icon name="ph:circle-bold"/></td>
+          <td></td>
+          <td><Icon name="ph:circle-bold"/></td>
+        </tr>
+      </tbody>
+  </table>
+</div>
+
+<style lang="stylus">
+.table-container
+  // display flex
+  // padding-top 1em
+  overflow-x auto
+  background var(--panel)
+  // border 1px solid var(--divider)
+  border-radius var(--radius)
+  h3
+    position sticky
+    left 0
+    margin-bottom 0
+  @media (max-width 600px)
+    max-width unset !important
+    margin-inline -40px !important
+    border-inline 0
+    border-radius 0
+    td:first-child
+      font-size .7em
+      font-weight 700
+      padding-inline 1em
+      // transform rotate(-45deg)
+
+table
+  // margin-left -2px
+  // margin-top -2px
+  filter blur(0px)
+  position relative
+  &::before
+    content ""
+    position absolute
+    inset 0
+    background linear-gradient(-25deg,var(--accentDarken), transparent 60%)
+    z-index 4
+    opacity .1
+    pointer-events none
+  /thead
+    height 5em
+    background var(--panel)
+    backdrop-filter blur(10px)
+    position sticky
+    top 0
+    z-index 3
+    a
+      position relative
+      text-underline-offset .5em
+      opacity .8
+      z-index 3
+
+  /tr:hover, /tr:focus-within
+    td
+      position relative
+      background var(--panelHighlight)
+      transition transform .4s
+      color var(--accent)
+      z-index -2
+      &:last-child
+        transform-origin right
+      &:first-child
+        // transform-origin left
+        text-shadow 0 0 12px var(--accent)
+      svg
+        filter drop-shadow(0 0 12px var(--accent))
+        opacity 1
+        transition unset
+
+  /td, /th
+      position relative
+      vertical-align middle
+      height 3em
+      padding-inline 1em
+      white-space nowrap
+      background var(--panel)
+      z-index 1
+      transition background 1s, transform .4s
+      &:not(:last-child)
+        border-right 1px solid var(--X2)
+      &:first-child
+        position sticky !important
+        left 0
+        padding-inline 2em
+        // min-width 20ch
+        // backdrop-filter blur(10px) // For some reason doesn't work well if parent has overflow :(
+        z-index 2 !important
+      &:nth-child(2)
+        color var(--accent)
+        svg
+          opacity 1
+          filter drop-shadow(0 0 12px var(--accent))
+        /thead &
+          text-shadow 0 0 12px var(--accent)
+          font-size 1.1em
+          font-weight 800
+      &::after // fix not being able to hover over dividers
+        content ""
+        position absolute
+        inset -2px
+        bottom 0
+        right 0
+    /svg
+      vertical-align middle
+      opacity .7
+      transition opacity 1s
+</style>

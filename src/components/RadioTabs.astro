@@ -1,0 +1,19 @@
+---
+const { options, name } = Astro.props;
+---
+<!-- <div></div> -->
+{options.map((item) => (
+	<>
+		<input class="hide" type="radio" name={name} id={item} value={item} />
+		<label class="button bordered" for={item}>{item}</label>
+	</>
+))}
+<style lang="stylus">
+	label
+		margin-right 1em
+		margin-bottom 2em
+		user-select none
+	input:checked + label
+		border-color var(--accent) !important
+		color var(--accent)
+</style>

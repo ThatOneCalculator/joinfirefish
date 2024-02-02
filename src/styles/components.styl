@@ -1,0 +1,677 @@
+.fade
+	mask linear-gradient(black 50%, transparent 98%)
+	-webkit-mask @mask
+
+
+.flex
+	display flex
+	flex-wrap wrap
+	&.gap
+		gap 0em 2em
+	&.small
+		gap 0em .4em
+	&.med
+		gap 0em .8em
+	> .label-button
+		margin-left 0 !important
+	@media (max-width 600px)
+		> a
+			flex-grow 1
+			justify-content center
+
+.flex-grow
+	flex-grow 1
+
+.centered
+	text-align center
+	justify-content center
+
+.glow
+	box-shadow 0 4px 100px var(--accentTransparent) !important
+
+.row
+	display flex
+	gap 1em
+	justify-content flex-start !important
+	mask linear-gradient(to right, black 50%, transparent)
+	-webkit-mask @mask
+
+aside + div
+	flex-grow 1
+
+.button
+	display inline-block
+	align-items center
+	position relative
+	padding .8em 1.7em
+	border-radius var(--radius-small)
+	background var(--buttonBg)
+	color var(--buttonFg)
+	font-weight 700
+	text-decoration none
+	align-self center
+	text-align center
+	transition transform .7s, color .2s
+	> svg
+		width 2em
+		height @width
+		margin-right .4em
+		margin-top -.3em
+		vertical-align middle
+	&.themed
+		color var(--fgOnAccent)
+		color white
+		text-shadow 0 4px 24px rgba(0,0,0,1)
+		box-shadow 0 4px 24px -12px var(--shadow)
+		font-weight 700
+		isolation isolate
+		&::before
+			content ""
+			position absolute
+			inset 0
+			border-radius inherit
+			z-index -1
+			opacity .8
+			background linear-gradient(-40deg, var(--accent), var(--accentDarken))
+			transition opacity .2s, transform .2s
+		&:hover, &:focus
+			transform translateY(-4px)
+			&::before
+				opacity 1
+				transform translateY(2px) scale(.98)
+				box-shadow 0 4px 24px -12px var(--accent)
+	&.bordered
+		background none
+		border 1px solid var(--divider)
+		padding .4em 1.2em
+	&.small
+		padding .4em 1.2em
+	&:hover
+		background var(--buttonHoverBg)
+	&:active
+		transform scale(.98)
+		&.themed
+			color var(--fgOnAccent)
+		&::before
+			transform translateY(2px) scale(.95)
+
+.fly
+	&:before
+		opacity 0
+	display inline-block
+	align-items center
+	animation slideUpFrom 1s 0s backwards cubic-bezier(0,0,0,1)
+	for row in (1..10)
+		&:nth-child({row})
+			animation-delay (.09 * row) + .5s
+
+.button-swap
+	position relative
+	width 1.4em
+	height 1.4em
+	> a
+		position absolute
+		inset -10px
+		// opacity 0
+		// pointer-events none
+		> svg
+			position absolute
+			inset 0
+			width 100%
+			height 100%
+			padding 6px
+	> :last-child
+		display none
+
+.highlight
+	font-weight 700 !important
+	color var(--accent)
+	text-underline-offset .4em
+	text-decoration-thickness .1em
+	text-shadow 0 0 24px var(--accentTransparent)
+	// font-size 1.2em
+	// margin-inline .2em
+
+.emoji
+	height 1.05rem
+	transition transform 0.2s;
+	border-radius 0px
+	&:hover
+		transform scale(1.2)
+
+.avatar
+	width 48px
+	height 48px
+	border-radius var(--radius-med)
+	background linear-gradient(45deg, var(--accent), var(--accentLighten))
+
+.media
+	position relative
+	&.ratio
+		padding-bottom 56.25%
+	border-radius var(--radius-med)
+	overflow hidden
+	background var(--bg)
+	// box-shadow 0 8px 24px rgba(0,0,0,0.1)
+
+
+	&.content
+		overflow visible
+		padding 0
+		&::before
+			content ""
+			position absolute
+			inset 0
+			background var(--panelHighlight)
+			border-radius var(--radius-med)
+			// box-shadow inset 0 -24px 100px 4px var(--accentLighten)
+			opacity .2
+
+	.grid
+		position absolute
+		inset 0
+		display flex
+		flex-wrap wrap
+		gap 8px
+		background var(--panel)
+		> div
+			width 40%
+			flex-grow 1
+			position relative
+			background var(--bg)
+			display flex
+			flex-direction column
+			justify-content center
+			align-items center
+			// gap 10px
+			padding 20px
+			overflow hidden
+			> img
+				// width 100%
+				// max-height 60%
+				// height 100%
+				height 0
+				flex-grow 1
+				object-position center
+				// aspect-ratio 1 / 1
+				border-radius var(--radius)
+				overflow hidden
+				// margin 20px
+			> a
+				margin 0
+				margin-bottom -10px
+				&::after
+					content ""
+					position absolute
+					inset -900px
+
+
+	> img
+		position absolute
+		width 120%
+		max-width unset
+		height 120%
+		top -10%
+		left -10%
+		object-fit cover
+		object-position center
+	> .content
+		// position absolute
+		inset 0
+		display grid
+		place-content center
+		padding 1em
+		aspect-ratio 16 / 9
+
+	&.themed
+		// border 8px solid var(--accent)
+		background none
+		> .content
+			border-radius var(--radius-med)
+		&::before
+			content ""
+			position absolute
+			inset 0
+			opacity .8
+			z-index -1
+			background linear-gradient(-45deg, var(--accentDarken), var(--accent))
+
+	// svg
+	// 	color white
+	// 	font-size 3em
+	// 	filter drop-shadow(0 0 24px var(--accent))
+	> a
+		position absolute
+		top 1em
+		left 1em
+		z-index 10
+		color white
+		font-weight 900
+		&::before
+			// background red
+			opacity 1 !important
+			border-radius var(--radius-small)
+
+.padded
+	padding 20px
+
+.cards
+	display flex
+	flex-wrap wrap
+	justify-content center
+	align-items unset !important
+	gap 0 50px !important
+	perspective 100px
+	width 100%
+	&.compact
+		> .card
+			flex-basis 25em !important
+			align-items flex-start !important
+	// &.columns
+	// 	align-items flex-start
+	// 	> .column
+	// 		flex 1 1 400px
+	// 		max-width 500px
+	// 		> .card
+	// 			margin-bottom 75px
+	&.small
+		gap 0 25px
+
+.card
+	position relative
+	padding 40px 40px
+	margin-bottom 50px
+	background var(--acrylicPanel)
+	flex 1 1 25em
+	max-width 500px
+	border-radius var(--radius)
+	box-shadow 0 24px 48px rgba(0,0,0,0.05)
+	transition background .4s
+	display flex
+	flex-direction column
+	// color var(--accentLighten)
+	text-align center
+
+	&::before
+		content ""
+		position absolute
+		inset 0
+		background linear-gradient(-25deg,var(--accentDarken), transparent 60%)
+		z-index 4
+		opacity .05
+		pointer-events none
+		border-radius inherit
+
+	&.left
+		text-align left
+
+	contain layout inline-size
+
+	&:hover, &:focus-within
+		background var(--panelHighlight)
+
+	.chips
+		font-size .9em
+		justify-content center
+
+	> h2
+		justify-content center
+		margin-top 0 !important
+	> p
+		margin-top 0
+		font-weight 600
+
+	> img
+		width 75px
+		height @width
+		margin 0 auto !important
+		margin-bottom 1em !important
+
+	> .button:last-child
+		margin-top auto
+
+	&.highlight
+		border 1px solid var(--accentTransparent)
+		box-shadow 0 8px 48px -24px var(--accentTransparent)
+	&.split
+		flex-direction row
+		flex-wrap wrap
+		max-width unset
+		flex unset
+		width 63em
+		// margin-inline -3em
+		// max-width 100vw
+		padding 0
+		text-align left
+		// overflow hidden
+		> div
+			width 200px
+			padding 40px
+			// overflow hidden
+			flex-grow 1
+			flex-basis 400px
+			&:first-child
+				min-width min-content
+			&:last-child
+				position relative
+				// flex-grow 1.5
+				border-radius 0 var(--radius) var(--radius) 0
+				max-width 600px
+				margin-left auto
+				// align-self flex-end
+				margin-bottom -20px
+				margin-right -20px
+				&::before
+					content ""
+					position absolute
+					inset 12px
+					left 62px
+					border-radius var(--radius)
+					background linear-gradient(-45deg, var(--accentDarken), var(--accent))
+
+	&-media
+		position relative
+		// margin-inline -40px
+		margin-bottom -80px
+		border-radius 0 0 var(--radius) var(--radius)
+		min-height 200px
+		flex-grow 1
+		display flex
+		justify-content center
+		&.mask
+			mask linear-gradient(black 50%, transparent)
+			-webkit-mask @mask
+			&-both
+				mask linear-gradient(transparent, black 20% 50%, transparent)
+				-webkit-mask @mask
+				margin-inline -40px
+				> *
+					inset-inline 40px
+					width unset
+		> *
+			position absolute
+			width 100%
+		.posts-container
+			width 100% !important
+
+	.swap
+		position relative
+		width 100%
+		padding-top 56.25%
+		> *
+			position absolute
+			inset 0
+			transition transform .4s, opacity .4s
+		> :last-child
+			transform translateY(10px)
+			opacity 0
+
+	&:not(:hover):not(:focus-within) .swap
+		> :last-child *
+			animation none !important
+	&:hover .swap, &:focus-within .swap
+		> :first-child
+			transform translateY(20px)
+			opacity 0
+			*
+				animation none !important
+		> :last-child
+			transform none
+			opacity 1
+
+.bordered
+	padding 1em
+	border 1px solid var(--divider)
+	border-radius var(--radius-med)
+	> :not(hr)
+		margin-block 0
+	hr
+		margin .7em
+
+.chips
+	display flex
+	flex-wrap wrap
+	gap 1em .7em
+.chip
+	position relative
+	padding .4em 1em
+	border-radius var(--radius-small)
+	// border-radius 100px
+	background var(--buttonBg)
+	font-weight 600
+	font-size .85em
+	border 1px solid var(--divider)
+	text-align center
+	transition flex-grow 2s, transform 1s, color 1s
+	&::before
+		content ""
+		position absolute
+		inset -.7em
+	&.highlight
+		margin 0
+		z-index 2
+		box-shadow 0 4px 48px -8px var(--accentTransparent)
+		color var(--accent)
+	@media (prefers-reduced-motion: no-preference)
+		&:hover
+			transition flex-grow .1s, transform .2s, color .2s
+			flex-grow .05
+			transform scale(1.04)
+
+.tag
+	position relative
+	display flex
+	justify-content center
+	align-items center
+	gap .4em
+	padding .2em .5em
+	background var(--buttonBg)
+	font-size .7em
+	border-radius 100px
+	font-weight 700
+	color var(--accentLighten)
+	&::before
+		// content ""
+		position absolute
+		inset 0
+		border-radius 6px
+		background var(--accent)
+		opacity .2
+
+	svg
+		vertical-align bottom
+		margin-bottom .1em
+		&:not(:first-child)
+			font-size .8em
+
+.poll
+	> a
+		display block
+		text-align left
+		margin-bottom .4em
+		font-size .9em
+		padding .4em 1em
+		border-radius var(--radius-small)
+		background-color var(--accentedBg)
+
+.label
+	user-select none
+
+hr
+	border-color var(--divider)
+	&.divider
+		height unset
+		border 0
+		border-top 1px solid var(--divider)
+		border-left 1px solid var(--divider)
+		align-self normal
+		margin 20px 10px
+
+.hide
+	position absolute
+	font-size 0
+	opacity 0
+
+.vertical-list
+	display flex
+	flex-direction column
+	gap 1em
+	width 34.5em
+	// margin-top 2em
+
+.accordian
+	display flex
+	overflow-x auto
+	margin-right auto
+	padding-right 2em
+	> *
+		margin-right -10em
+		box-shadow -0px 0 200px var(--bg)
+		&:hover
+			margin-inline 0 1em
+			&:first-child
+				margin-inline-start 0
+			& + *
+				box-shadow none
+	@media (pointer coarse)
+		flex-wrap wrap
+		> *
+			margin-inline 0 1em
+
+
+.wide
+	min-width 100%
+
+.has-tooltip
+	position relative
+	z-index 10
+	display inline-block
+	/.tooltip
+		position absolute
+		opacity 0
+		background var(--accent)
+		color var(--fgOnAccent)
+		text-align center
+		padding .7em
+		border-radius var(--radius-small)
+		bottom 140%
+		width max-content
+		max-width 200px
+		box-shadow 0 4px 8px rgba(0,0,0,0.1)
+		transform scale(.98) translateY(5px)
+		pointer-events none
+		transition transform .3s cubic-bezier(0,0,0,1.2), opacity .1s
+	&:hover, &:focus
+		.tooltip
+			opacity 1
+			transform none
+
+
+.parallax-section
+	position relative
+	// font-size 1.2em
+	margin-block 150px !important
+	> .behind
+		position absolute
+		inset 0
+		display flex
+		align-items center
+		font-size 2.5em
+		will-change transform
+	> .details
+		width 600px !important
+		z-index 2
+		.chip
+			background var(--acrylicPanel)
+			&:hover
+				color var(--accent)
+		filter drop-shadow(0 0 200px var(--bg))
+
+
+.sticky-section
+	justify-content center !important
+	align-items flex-end !important
+	flex-wrap wrap !important
+	gap 15vh 10% !important
+	margin-bottom 75px !important
+	// .track
+	// 	width 400px
+	// 	align-self stretch
+	// 	margin-block -100vh
+	// 	padding-top 100vh
+	// 	mask linear-gradient(to bottom, black calc(100% - 100vh - 800px), transparent calc(100% - 100vh - 100px))
+	// 	-webkit-mask @mask
+	// 	// .details
+	// 	// 	width 400px !important
+	.details
+		position sticky !important
+		top calc(10vh + var(--stickyTop))
+		// margin-block 2em
+		// padding-block 4em
+		margin-bottom 15vh
+		text-align left
+		align-self flex-start
+		max-width calc(100% - 20px) !important
+		will-change transform
+		.no-bg
+			padding-bottom 0 !important
+
+.reverse
+	flex-wrap wrap-reverse !important
+	.track
+		order 2
+	.details
+		order 2
+		align-self flex-end
+
+
+[astro-icon]
+	height 1.4em
+	width @height
+
+.lined
+	font-family "Flow Circular" !important
+	color var(--accent)
+	line-break anywhere
+	user-select none
+	-webkit-user-select none
+	&:last-child
+		margin-bottom -2em
+	@extends .fade
+	// padding-inline .5em
+	// p&
+	// 	padding-inline .7em
+
+.muted
+	opacity .5
+
+.select-container
+	display flex
+	align-items center
+	border 1px solid var(--divider)
+	border-radius var(--radius-small)
+	padding .4em .7em
+	transition background .2s
+	label
+		height 1.4em
+	select
+		width 100%
+		background none
+		color inherit
+		border 0
+		outline none
+	&:hover
+		background var(--buttonBg)
+	&:focus-within
+		outline auto
+
+
+.flip
+	transform scaleX(-1)
+
+@media (max-width 600px)
+	.desktop-only
+		display none
+@media (min-width 601px)
+	.mobile-only
+		display none

@@ -1,0 +1,62 @@
+---
+import Ticker from "../Ticker.astro";
+const { name, at, is, ticker } = Astro.props;
+let { readable } = Astro.props;
+readable = readable ? null : "";
+---
+
+<article class={is}>
+	<div>
+		<div class="avatar"></div>
+		<div class="line"></div>
+	</div>
+	<div class="content" aria-label={readable}>
+		<header aria-hidden="true">
+			<span class="displayname">{name}</span>
+			<span class="username">{at}</span>
+			<!-- <span class="date">1d ago</span> -->
+			<Ticker>{ticker}</Ticker>
+		</header>
+		<slot></slot>
+	</div>
+</article>
+<style lang="stylus">
+	article, header
+		display flex
+	article
+		margin-bottom 2em
+		> :first-child
+			display flex
+			flex-direction column
+			align-items center
+			margin-right .9em
+			/.line
+				border-left 4px solid var(--X13)
+				flex-grow 1
+				margin-bottom -2em
+	header
+		gap .4em
+		align-items center
+	.username
+		margin-right auto
+		font-size .9em
+	.content
+		width 0
+		flex-grow 1
+		:global(p)
+			margin-top .4em !important
+	.quote
+		padding 1.4em 1.2em
+		border 1px solid var(--divider)
+		border-radius var(--radius)
+		font-size .9em
+		margin-bottom 0
+		&:hover
+			background var(--panelHighlight)
+		.avatar
+			width 2.5em
+			height @width
+		.line
+			display none
+
+</style>

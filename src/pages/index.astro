@@ -1,0 +1,513 @@
+---
+import { t, changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Banner from "../components/Banner.astro";
+import Title from "../components/Title.astro";
+import Comparison from "../components/Comparison.astro";
+import IconButton from "../components/IconButton.astro";
+import PostContainer from "../components/skeletons/PostContainer.astro";
+import Post from "../components/skeletons/Post.astro";
+import PostReply from "../components/skeletons/PostReply.astro";
+import Reaction from "../components/skeletons/Reaction.astro";
+import UI1 from "../components/skeletons/UI1.astro";
+import UI2 from "../components/skeletons/UI2.astro";
+import Widgets from "../components/skeletons/Widgets.astro";
+import Ticker from "../components/Ticker.astro";
+import ThemeSelector from "../components/ThemeSelector.astro";
+import Logo from "../components/brand/Logo.astro";
+import Mention from "../components/Mention.astro";
+import FAQ from "../components/FAQ.astro";
+import Data from "../components/Data.astro";
+import IconLabelButton from "../components/IconLabelButton.astro";
+import { getCollection } from "astro:content";
+const allBlogs = await getCollection("blog");
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import fishImage from "../images/firefishreal.webp";
+import HeroMockup from "../components/HeroMockup.astro";
+import "@fontsource/flow-circular";
+
+changeLanguage("en");
+---
+<Layout title="Home">
+	<Hero classes="centered">
+		<!-- <Logo width="250"></Logo> -->
+		<div class="header">
+			<Logo width="200" transition:name="logo"/>
+			<div class="flex-grow"></div>
+			<Banner slot="banner" href={`/blog/${allBlogs[0].slug}`}>
+				{allBlogs[0].data.title}
+			</Banner>
+		</div>
+		<Title transition:name="title"/>
+		<p class="mobile-only">{ t("communitySub.0") }</p>
+		<br>
+		<div slot="graphic">
+			<UI1 classes="cursor-parallax">
+				<p aria-hidden="true">built by a bunch of furries</p>
+			</UI1>
+			<div class="fake-post cursor-parallax">
+				<!-- <HeroMockup></HeroMockup> -->
+				<PostContainer>
+					<Post class="item" id="post" readable icon="/branding/inverse_wordmark.svg" name="Fred Firefish" at="@fred@firefish.social" ticker="Firefish">
+						<div class="media content" style="font-size: 1.15em">
+							<div class="content centered">
+								<p class="desktop-only"><b>{ t("communitySub.0") }</b></p>
+								<div class="flex gap med centered">
+									<a class="button themed glow" href="/join" data-umami-event="Get Started (Home)">Get Started</a>
+									<IconLabelButton href="#sections">Learn More</IconLabelButton>
+								</div>
+							</div>
+						</div>
+						<div class="reactions">
+							<Reaction e="blobfoxaww"></Reaction>
+							<Reaction e="calclol"></Reaction>
+							<Reaction e="heart"></Reaction>
+							<Reaction e="shh"></Reaction>
+							<Reaction e="wave"></Reaction>
+							<Reaction e="woozy"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+			</div>
+		</div>
+	</Hero>
+	<div class="sections" id="sections">
+		<section class="sticky-section reverse">
+			<div class="details">
+				<h2 class="big">{ t("express") }</h2>
+				<p>{ t("expressSub") }</p>
+				<div class="chips">
+					<div class="chip">{ t("media") }</div>
+					<div class="chip highlight">{ t("polls") }</div>
+					<div class="chip">{ t("imageDescriptions") }</div>
+					<div class="chip highlight">{ t("quotePosts") }</div>
+					<div class="chip">{ t("customEmojis") }</div>
+					<div class="chip highlight">{ t("contentWarnings") }</div>
+					<div class="chip">{ t("hashtags") }</div>
+					<div class="chip highlight">{ t("emojiReactions") }</div>
+					<!-- <div class="chip">{ t("animations") }</div> -->
+					<div class="chip highlight">{ t("markdown") }</div>
+					<div class="chip">{ t("threadedReplies") }</div>
+				</div>
+			</div>
+			<div class="vertical-list">
+				<PostContainer>
+					<Post name="Fred Firefish" at="@firefish@fedi.software" href="https://fedi.software/@firefish" ticker="Firefish">
+						<p>{ t("posts.poll.q") }</p>
+						<div class="card-media mask">
+							<div class="poll">
+								<a>{ t("posts.poll.a1") }</a>
+								<a>{ t("posts.poll.a2") }</a>
+								<a>{ t("posts.poll.a3") }</a>
+								<a>{ t("posts.poll.a4") }</a>
+								<a>{ t("posts.poll.a5") }</a>
+							</div>
+						</div>
+					</Post>
+				</PostContainer>
+				<PostContainer style="margin-top: 2rem">
+					<Post name="Anonymous" at="@anonbird@cool.technology" ticker="Tech">
+						<p>{ t("posts.cw.caption") }</p>
+						<details>
+							<summary class="button">{ t("posts.cw.button") }</summary>
+							<p>
+								<span style="animation: mfm-twitch 0.6s infinite linear">
+									{ t("posts.cw.content") }
+								</span>
+								<span style="animation: mfm-bounce 0.8s infinite linear" class="emoji mfm-x2">
+									&nbsp;👻
+								</span>
+							</p>
+						</details>
+							<div class="reactions">
+							<Reaction e="shh"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+				<PostContainer>
+					<Post name="Cat" at="@cat@foxes.social" ticker="Foxes">
+						<p>{ t("posts.quote") }</p>
+						<PostReply name="Fish!" at="@hourlyfish@botsin.space" is="quote" ticker="Bots In Space">
+							<div class="media ratio">
+								<Image src={fishImage} alt="A real Firefish" loading="lazy">
+							</div>
+						</PostReply>
+						<div class="reactions">
+							<Reaction e="plead"></Reaction>
+							<Reaction e="calclol"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+				<PostContainer>
+					<Post readable name="Cat" at="@cat@foxes.social" ticker="Foxes">
+						<p>
+							<b>{ t("posts.mfm.1") }</b>
+							{ t("posts.mfm.2") } <em>{ t("posts.mfm.3") }</em> { t("posts.mfm.4") }
+							<span style="animation: mfm-spinX 2s infinite linear">
+								{ t("posts.mfm.5") }
+							</span>
+							<span class="_mfm_blur_">
+								{ t("posts.mfm.6") }
+							</span>
+							{ t("posts.mfm.7") }
+							<span style="animation: tada 1s infinite">
+								{ t("posts.mfm.8") }
+							</span>
+						</p>
+						<div class="reactions">
+							<Reaction e="glub"></Reaction>
+							<Reaction e="spiral"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+			</div>
+		</section>
+
+		<div class="cards">
+			<section class="card">
+				<h2>{ t("stayAlert") }</h2>
+				<p>{ t("stayAlertSub") }</p>
+				<div class="row" style="font-size: .8em">
+					<div class="button themed">Foxes</div>
+					<div class="button">Firefish</div>
+					<div class="button">#art</div>
+					<div class="button">#butterflies</div>
+				</div>
+				<div class="card-media mask-both">
+					<div class="vertical-list" style="font-size: .5em; padding-inline: 2px; gap: .5em;">
+						<PostContainer>
+						</PostContainer>
+						<PostContainer>
+						</PostContainer>
+						<PostContainer>
+						</PostContainer>
+						<PostContainer>
+						</PostContainer>
+					</div>
+				</div>
+			</section>
+			<section class="card">
+				<h2> { t("customizable") } </h2>
+				<p> { t("customizableSub") } </p>
+				<ThemeSelector></ThemeSelector>
+				<div class="swap">
+					<UI1 size="small">
+						<Icon name="ph:paint-brush-bold"></Icon>
+						<p>{ t("chooseColor") }</p>
+					</UI1>
+					<UI2 size="small">
+					</UI2>
+				</div>
+			</section>
+			<section class="card">
+				<h2>{ t("atAGlance") }</h2>
+				<p>{ t("atAGlanceSub") }</p>
+				<div class="chips">
+					<div class="chip">{ t("stickyNotes") }</div>
+					<div class="chip">{ t("notifications") }</div>
+					<div class="chip">{ t("timelines") }</div>
+					<div class="chip">{ t("calendar") }</div>
+					<div class="chip">{ t("rss") }</div>
+					<div class="chip">{ t("trends") }</div>
+					<div class="chip">{ t("activity") }</div>
+					<div class="chip">{ t("clocks") }</div>
+					<div class="chip">{ t("images") }</div>
+					<div class="chip">{ t("charts") }</div>
+					<div class="chip">+ { t("more") }</div>
+				</div>
+				<div class="card-media mask" style="margin-top: -1.5em">
+					<Widgets></Widgets>
+				</div>
+			</section>
+		</div>
+
+		<section class="sticky-section" id="fediverse">
+			<!-- <div class="track"> -->
+				<div class="details" style="max-width: 24em">
+					<h2 class="big">{ t("connected.1") }
+						<br>
+						{ t("connected.2") } <span class="highlight"> Fediverse</span></h2>
+					<PostContainer classes="no-bg">
+						<PostReply readable name="Panda" at="@panda@pandasin.space" ticker="Pandas In Space">
+							<p>
+								<span class="">
+									{ t("connected.3") }
+									<br>
+									{ t("connected.4") }
+								</span>
+							</p>
+						</PostReply>
+						<Post readable name="Cat" at="@cat@foxes.social" ticker="Foxes">
+							<p>{ t("ap.1") }
+								<a href="https://activitypub.rocks" class="highlight"> ActivityPub </a>
+								{ t("ap.2") }
+								<Mention href="https://joinmastodon.org" icon="mastodon">Mastodon</Mention>
+								<Mention href="https://pixelfed.org" icon="pixelfed">Pixelfed</Mention>
+								<Mention href="https://joinpeertube.org" icon="peertube">Peertube</Mention>
+								<Mention href="https://akkoma.social" icon="akkoma">Akkoma</Mention>
+								<Mention href="https://friendi.ca" icon="friendica">Friendica</Mention>
+								<Mention href="https://misskey-hub.net" icon="misskey">Misskey</Mention>
+								&nbsp;{ t("ap.3") }
+							</p>
+						</Post>
+					</PostContainer>
+				</div>
+			<!-- </div> -->
+			<div class="vertical-list">
+				<PostContainer>
+					<Post name="Otter" at="@otter@theirfirefish.com" ticker="Their Firefish">
+						<p>
+							Hello Everyone! This is my <a class="hashtag">#introduction</a>...
+							<span class="lined fade" aria-hidden="true">
+								FOXFOXFOX foxfox foxfoxfox FOX FOX foxfoxfox FOXFOXFOXFOXFOXFOXOFXOFX fox foxfox <br>
+								 foxfoxfox foxfoxfoxfox foxfox <br>
+								 FOXFOXFOXFOXFOXOFOXFFOXOFXOFOFOFOFOFOX
+							</span>
+						</p>
+						<div class="reactions">
+							<Reaction e="wave"></Reaction>
+							<Reaction e="heart"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+				<PostContainer>
+					<Post name="Streamer" at="@streamer@owncast.online" ticker="Owncast Server">
+						<p>{ t("posts.stream") }</p>
+						<div class="media">
+							<img src="" alt="" loading="lazy">
+							<!-- <Mention>LIVE</Mention> -->
+							<div class="content">
+								<Icon name="ph:play" class="play"></Icon>
+							</div>
+						</div>
+						<div class="reactions">
+							<Reaction e="see_no_evil"></Reaction>
+							<Reaction e="hear_no_evil"></Reaction>
+							<Reaction e="speak_no_evil"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+				<!-- <PostContainer>
+					<Post name="Your favorite podcast..." at="@streamer@castopod.org" ticker="Castopod Server">
+						<p>{ t("posts.podcast.1") }</p>
+						<a class="button">
+							<Icon name="ph:play-circle"></Icon>
+							{ t("posts.podcast.2") }
+							<span class="muted">
+								(1:34:29)
+							</span>
+						</a>
+						<div class="reactions">
+							<Reaction e="woozy"></Reaction>
+							<Reaction e="zany"></Reaction>
+						</div>
+					</Post>
+				</PostContainer> -->
+				<PostContainer>
+					<PostReply name="Blogger" at="@myblog@writefreely.org" ticker="WriteFreely Server">
+						<p>
+							{ t("posts.blog") }
+							<span class="lined fade" aria-hidden="true">
+								FOXFOXFOX foxfox foxfoxfox FOX FOX foxfoxfox FOXFOXFOXFOXFOXFOXOFXOFX fox foxfox <br>
+								 foxfoxfox foxfoxfoxfox foxfox <br>
+								 FOXFOXFOXFOXFOXOFOXFFOXOFXOFOFOFOFOFOX
+							</span>
+						</p>
+						<div class="reactions">
+							<Reaction e="party"></Reaction>
+							<Reaction e="blobfoxaww"></Reaction>
+						</div>
+					</PostReply>
+					<Post name="foxxo" at="@fox@firefish.social" ticker="Firefish">
+						<p>{ t("posts.blogReply") }</p>
+						<div class="reactions">
+							<Reaction e="blobfoxaww"></Reaction>
+						</div>
+					</Post>
+				</PostContainer>
+			</div>
+		</section>
+
+		<section class="wide parallax-section">
+			<div class="behind">
+				<h2>{ t("andMore") }</h2>
+			</div>
+			<div class="details">
+				<div class="chips">
+					<div class="chip">{ t("followRequests") }</div>
+					<div class="chip">{ t("accountMigration") }</div>
+					<div class="chip">{ t("chats") }</div>
+					<div class="chip">{ t("groups") }</div>
+					<div class="chip">{ t("bookmarks") }</div>
+					<div class="chip">{ t("channels") }</div>
+					<div class="chip">{ t("filters") }</div>
+					<div class="chip">{ t("fullTextSearch") }</div>
+					<div class="chip">{ t("pages") }</div>
+					<div class="chip">{ t("statusBars") }</div>
+					<div class="chip">{ t("dataExport") }</div>
+					<div class="chip">{ t("plugins") }</div>
+					<div class="chip">{ t("api") }</div>
+					<div class="chip">{ t("webhooks") }</div>
+					<div class="chip">{ t("catMode") }</div>
+				</div>
+			</div>
+		</section>
+		<div class="cards" id="getstarted">
+			<section class="card split highlight">
+				<div>
+					<h2>{ t("getStarted.1") }</h2>
+					<p>{ t("getStarted.2") }</p>
+					<div class="flex gap small">
+						<a class="button themed glow" href="/join" data-umami-event="Server List (Home)">{ t("getStarted.3") }</a>
+						<IconLabelButton href="https://git.joinfirefish.org/firefish/firefish#-getting-started" target="_blank">{ t("getStarted.4") }</IconLabelButton>
+					</div>
+				</div>
+				<div class="themed">
+					<Data></Data>
+				</div>
+			</section>
+		</div>
+		<section id="comparison" class="wide">
+			<Comparison/>
+		</section>
+		<section id="faq" class="wide">
+			<div class="details">
+				<h2>{ t("faq") }</h2>
+				<FAQ q={ t("faqQuestion1") }>
+					{ t("faqAnswer1.part1") } <Mention href="https://misskey-hub.net" icon="misskey">Misskey</Mention> { t("faqAnswer1.part2") }
+				</FAQ>
+				<FAQ q="How can I help out?">
+					If you want to file an issue or know how to code, we're open source on<Mention icon="ph:gitlab-logo-simple-bold" href="https://git.joinfirefish.org/firefish/firefish">GitLab</Mention>!
+					If you know a non-English language and want to help out with translations, you can do so on<Mention icon="weblate" href="https://hosted.weblate.org/engage/firefish/">Weblate</Mention>.
+					And if you have some spare change, you can donate on<Mention icon="opencollective" href="https://opencollective.com/Firefish">OpenCollective</Mention> to help us keep the lights on.
+				</FAQ>
+				<FAQ q="Who's that squid I keep seeing?">
+					That's Glub, our unofficial mascot! It started from a community meme and grew into a Fediverse-wide trend for a bit <img class="emoji" src="/images/emojis/glub.avif" alt="Glub!!">
+				</FAQ>
+			</div>
+		</section>
+
+		<!-- <section style="padding-top: 20vh">
+			<img width="40" src="/branding/inverse_wordmark.svg" alt="">
+		</section> -->
+	</div>
+</Layout>
+<style lang="stylus">
+	details > summary
+		list-style none
+
+	@keyframes details-show
+		from
+			opacity 0
+			transform var(--details-translate, translateY(-0.5em))
+
+	details[open] > *:not(summary)
+		animation details-show 150ms ease-in-out
+	.sections
+		margin-top 4vh
+	:global(#hero .button.themed)
+		font-weight 800
+		text-shadow none
+		font-size .9em
+</style>
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	gsap.registerPlugin(ScrollTrigger);
+
+	function isTop() {
+		if (window.scrollY == 0) {
+			document.documentElement.classList.add("top");
+		} else {
+			document.documentElement.classList.remove("top");
+		}
+	}
+
+	gsap.matchMedia().add("(min-width: 1601px)", (context) => {
+		gsap.set("#hero", {
+			x: -36.25
+		});
+		document.documentElement.classList.add("top");
+		document.addEventListener("scroll", isTop);
+
+		return () => {
+			gsap.set("#hero", {
+				x: 0
+			});
+			document.documentElement.classList.remove("top");
+			document.removeEventListener("scroll", isTop);
+		}
+	})
+	gsap.to("#hero, #hero .info", {
+		scrollTrigger: {
+			trigger: "#hero",
+			scrub: true,
+			start: "top 0px"
+			// markers: true
+		},
+		y: -50,
+	});
+	gsap.to("#hero", {
+		scrollTrigger: {
+			trigger: "#hero",
+			scrub: true,
+			start: "20% top",
+			end: "70% top",
+			// markers: true
+		},
+		opacity: 0,
+		scale: .97,
+		ease: "power1.inOut"
+	});
+
+	gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+		gsap.to("#hero .skeleton-container", {
+			scrollTrigger: {
+				trigger: "#hero",
+				scrub: 1,
+				start: "top 0"
+			},
+			y: 70,
+			scale: .98,
+			rotateX: 30
+		});
+		gsap.to("#hero .wave-bg", {
+			scrollTrigger: {
+				trigger: "#hero",
+				scrub: true,
+				start: "top 0",
+			},
+			scaleY: 1.5,
+			// y: -50
+		})
+		gsap.to("#hero .fake-post", {
+			scrollTrigger: {
+				trigger: "#hero",
+				scrub: 1,
+				start: "top 0"
+			},
+			y: 60,
+			// opacity: 0
+		});
+	});
+
+	// gsap.fromTo(".mask-both > .vertical-list", {
+	// 	y: -300,
+	// 	gap: "30px",
+	// 	opacity: 0
+	// }, {
+	// 	scrollTrigger: {
+	// 		trigger: ".mask-both",
+	// 		scrub: 2,
+	// 		start: "50% bottom",
+	// 		end: "bottom top"
+	// 	},
+	// 	y: 0,
+	// 	gap: "10px",
+	// 	opacity: 2
+	// })
+
+
+</script>

@@ -1,0 +1,14 @@
+---
+import { changeLanguage } from "i18next";
+import MarkdownPostLayout from "../layouts/MarkdownPostLayout.astro";
+import * as nsData from "../content-internal/ns.mdx";
+import { Content } from "../content-internal/ns.mdx";
+
+changeLanguage("en");
+
+console.log("nsData", nsData);
+---
+
+<MarkdownPostLayout frontmatter={nsData.frontmatter}>
+    <Content>
+</MarkdownPostLayout>

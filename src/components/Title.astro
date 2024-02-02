@@ -1,0 +1,129 @@
+---
+import { t } from "i18next";
+---
+
+<h1 style="font-size: 2.5em;" aria-label=`${t("flyin.1")} ${t("flyin.2")} ${t("flyin.3")} ${t("flyin.4")} ${t("flyin.5")}`>
+  <span class="title">{t("flyin.1")}</span>
+  <div class="parent">
+    <span class="fly child">{t("flyin.2")}</span>
+    <span class="fly child">{t("flyin.3")}</span>
+    <span class="fly child">{t("flyin.4")}</span>
+    <span class="fly child">{t("flyin.5")}</span>
+  </div>
+</h1>
+
+<script>
+  import { gsap } from "gsap";
+  import SplitType from "split-type";
+
+  const loadTitle = () => {
+
+    const title = new SplitType(".title", { types: "words", tagName: "span" });
+    const chars = title.words;
+
+    gsap.set("h1", {
+      opacity: 1
+    })
+
+    gsap.fromTo(
+      chars,
+      {
+        y: 20,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.03,
+        duration: 0.6,
+        ease: "circ.out(1, 0.3)",
+      }
+    );
+
+    const subtitles: NodeListOf<HTMLHeadingElement> =
+      document.querySelectorAll(".child");
+    const total = subtitles.length;
+
+    gsap.set(subtitles, {
+      opacity: 0,
+      y: 20,
+    });
+
+    function scrollText(
+      element: HTMLHeadingElement,
+      index: number,
+      total: number
+    ) {
+      const timeline = gsap.timeline({
+        defaults: {
+          ease: "power4.easeInOut",
+        },
+        onComplete: () => {
+          if (index !== total - 1) {
+            scrollText(subtitles[index + 1], index + 1, total);
+          }
+          if (index === total - 1) {
+            scrollText(subtitles[0], 0, total);
+          }
+        },
+      });
+
+      timeline.set(
+        element,
+        {
+          y: 20,
+        },
+        "resetElement"
+      );
+
+      timeline.to(
+        element,
+        {
+          opacity: 1,
+          display: "inline-block",
+          y: 0,
+          duration: 0.5,
+        },
+        "fadeInUpText"
+      );
+
+      timeline.to(
+        element,
+        {
+          opacity: 0,
+          y: -20,
+          delay: index === 0 ? 2 : 1,
+          duration: 0.5,
+          ease: "power4.in"
+        },
+        "fadeOutUpText"
+      );
+    }
+
+    if (subtitles.length > 0) {
+      scrollText(subtitles[0], 0, total);
+    }
+  }
+  loadTitle();
+  document.addEventListener("astro:page-load", loadTitle);
+</script>
+
+<style lang="stylus">
+.parent
+    position: relative;
+    height 1em
+    text-align center
+.child
+    width: 100%;
+    left: 50%;
+    margin-left: -50%;
+    display: block;
+    position: absolute;
+    font-size 1.3em
+    text-overflow ellipsis
+    overflow hidden
+:global(.char)
+  opacity 0
+h1
+  opacity 0
+</style>

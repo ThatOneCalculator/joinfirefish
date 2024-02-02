@@ -1,0 +1,50 @@
+---
+import "/src/styles/skeletons.styl";
+import Widgets from "./Widgets.astro";
+import { Icon } from "astro-icon/components";
+
+const { size } = Astro.props;
+---
+<div class={"skeleton-container " + size} aria-hidden="true">
+	<div class="skeleton">
+		<div class="sidebar">
+			<img class="avatar" alt="" />
+			<a class="active">
+				<Icon name="ph:house-bold" color="var(--accent)" />
+			</a>
+			<a>
+				<Icon name="ph:bell-bold" color="var(--text)" />
+			</a>
+			<a>
+				<Icon name="ph:chats-circle-bold" color="var(--text)" />
+			</a>
+			<a>
+				<Icon name="ph:compass-bold" color="var(--text)" />
+			</a>
+			<a>
+				<Icon name="ph:bookmark-simple-bold" color="var(--text)" />
+			</a>
+			<a>
+				<Icon name="ph:magnifying-glass-bold" color="var(--text)" />
+			</a>
+			<a>
+				<Icon name="ph:dots-three-outline-fill" color="var(--text)"></Icon>
+			</a>
+		</div>
+		<div class="columns">
+			<div>
+				<Widgets></Widgets>
+			</div>
+			<div>
+				<div class="header lines"></div>
+				<p>Deck View</p>
+				<Widgets></Widgets>
+			</div>
+			<div>
+				<div class="header lines"></div>
+				<p>Customizable<br>Columns</p>
+				<Widgets></Widgets>
+			</div>
+		</div>
+	</div>
+</div>

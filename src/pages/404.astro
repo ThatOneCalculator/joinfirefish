@@ -1,0 +1,34 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import UI1 from "../components/skeletons/UI1.astro";
+import PostContainer from "../components/skeletons/PostContainer.astro";
+import Post from "../components/skeletons/Post.astro";
+
+changeLanguage("en");
+---
+<Layout title="Page Not Found" noFooter>
+	<Hero>
+		<h1>Page Not Found...</h1>
+		<p>
+			The URL may be incorrect,
+			the page hasn't been created yet, or has since been removed.
+		</p>
+		<a class="button themed" href="/">Go Back Home</a>
+		<div slot="graphic">
+			<UI1>
+			</UI1>
+			<div class="fake-post">
+				<PostContainer>
+					<Post readable name="foxxo" at="@foxxo@foxesin.space">
+						<p>In the meantime, have this picture of a random fox!</p>
+						<div class="media ratio">
+							<img src="https://api.tinyfox.dev/img?animal=fox">
+						</div>
+					</Post>
+				</PostContainer>
+			</div>
+		</div>
+	</Hero>
+</Layout>

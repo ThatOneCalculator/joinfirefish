@@ -1,0 +1,61 @@
+---
+import { Icon } from "astro-icon/components";
+import i18next, { t } from "i18next";
+import { localizePath } from "astro-i18next";
+import ISO6991 from "iso-639-1";
+
+const supportedLanguages = i18next.languages;
+const currentLanguage = i18next.language;
+---
+
+<details>
+	<summary>
+		<Icon name="ph:globe" />
+		<p>{t("languages")}</p>
+	</summary>
+
+	<ul role="list">
+		{
+			supportedLanguages.map((supportedLanguage) => {
+				const nativeName = ISO6991.getNativeName(supportedLanguage);
+				const href = localizePath(Astro.url.pathname, supportedLanguage);
+
+				return (
+					<li>
+						<a href={href} aria-current={supportedLanguage === currentLanguage}>
+							{nativeName}
+						</a>
+					</li>
+				);
+			})
+		}
+	</ul>
+</details>
+
+<style>
+	details[open] {
+	}
+
+	details summary::-webkit-details-marker {
+		display: none;
+	}
+
+	summary {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		gap: 0.25rem;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		padding-left: calc(19px + 0.25rem);
+		list-style: none;
+	}
+
+	ul > li {
+		line-height: 1.75;
+	}
+</style>

@@ -1,0 +1,493 @@
+---
+import { changeLanguage, t } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import UI1 from "../components/skeletons/UI1.astro";
+import PostContainer from "../components/skeletons/PostContainer.astro";
+import Post from "../components/skeletons/Post.astro";
+import PostReply from "../components/skeletons/PostReply.astro";
+import IconLabelButton from "../components/IconLabelButton.astro";
+import InstanceCard from "../components/InstanceCard.astro";
+import Mention from "../components/Mention.astro";
+import Data from "../components/Data.astro";
+import { tokenize } from "sentence-tools";
+
+changeLanguage("en");
+
+interface Instance {
+    domain: string;
+    description?: string;
+    name?: string;
+    verified?: boolean;
+    users?: number;
+    url?: string;
+    icon?: string;
+    banner?: string;
+    version?: string;
+    langs?: string[];
+    color?: string | null;
+}
+// const date = new Date();
+// const formattedDate = `${
+//     date.getMonth() + 1
+// }/${date.getDate()}/${date.getFullYear()} @ ${date.getHours()}:${
+//     date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
+// }`;
+const categories = [
+    "General",
+    "Regional",
+    "Tech",
+    "Art",
+    "LGBTQ+",
+    "Activism",
+    "Gaming",
+    "Furry",
+    "Anime",
+    "Sports",
+    "NSFW",
+];
+const generalInstances: Instance[] = [
+    // {
+    //     domain: "firefish.social",
+    //     verified: true,
+    //     icon: "/branding/inverse_wordmark.svg",
+    //     banner: "https://blob.jortage.com/blobs/7/381/73811e4483941603bd41ccbcc90258fa513ba56a5dc8d8724bb0c8e13c8824202e43c0284d7c7a6aeea4cea8cfdefa612c2fa12f549d66ffd8abee65cd5734dc",
+    //     description: "The flagship Firefish server!",
+    // },
+    {
+        domain: "calckey.world",
+    },
+    {
+        domain: "procial.tchncs.de",
+        icon: "https://media.procial.tchncs.de/media/3d91f5ea-e8a0-4026-80ec-4b296a453a70.png",
+    },
+    {
+        domain: "evil.social",
+        description: "Enjoy your stay.",
+    },
+    {
+        domain: "meetiko.org",
+    },
+    {
+        domain: "calc.04.si",
+    },
+    {
+        domain: "relib.re",
+    },
+    {
+        domain: "kalckey.com",
+    },
+    {
+        domain: "ibe.social",
+        description: "I be social. You be social. Let's all be social. A safe and fun server. Be kind, Be respectful.",
+    },
+    {
+        domain: "lethallava.land",
+        icon: "/images/forced_icons/lll.avif",
+        banner: "https://bunnyt1c.s3.us-east-005.backblazeb2.com/calckeysoc/6a611c59-36d6-4c2b-91fa-2ce43955ac92.png",
+    },
+    {
+        domain: "himagine.club",
+        description: "Himagine\u306F\u3001\u6687\u4EBA\u305F\u3061\u304C\u96C6\u3046\u610F\u8B58\u4F4E\u3044\u7CFBSNS\u3067\u3059\u3002",
+    },
+    {
+        domain: "erisly.social",
+    },
+    {
+        domain: "jistflow.com",
+    },
+    {
+        domain: "dvd.chat",
+    },
+    {
+        domain: "misskey.pm",
+    },
+    {
+        domain: "key.kubiwa.moe",
+        description: "\u304F\u3073\u308F\u3064\u304D\u30FC\u306F\u3001\u65E5\u672C\u306EIPv6\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u30E6\u30FC\u30B6\u30FC\u5411\u3051\u306E\u30BD\u30FC\u30B7\u30E3\u30EB\u30CD\u30C3\u30C8\u30EF\u30FC\u30AD\u30F3\u30B0\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002",
+    },
+    {
+        domain: "frfsh.plus.st",
+    },
+    {
+        domain: "firefish.community",
+    },
+    {
+        domain: "hol.ogra.ph",
+    },
+    {
+        domain: "fedi.fish",
+    },
+    {
+        domain: "odd.town",
+    },
+    {
+        domain: "firefish.place",
+    },
+    {
+        domain: "pepecyb.de",
+    },
+];
+const regionalInstances = [
+    {
+        domain: "firefish.nz",
+        description: "Made for kiwis and honorary kiwis home and abroad!",
+        icon: "https://storage.serverius.net/ffmedia:social/social/06c5175d-c410-4d9b-ba25-e33eb277bad8.webp",
+    },
+    {
+        domain: "vancity.social",
+    },
+    {
+        domain: "bostonsocial.online",
+    },
+    {
+        domain: "federation.network",
+    },
+    {
+        domain: "www.foxyhole.io",
+    },
+    {
+        domain: "peculiar.florist",
+    },
+    {
+        domain: "firefish.ruhr",
+    },
+    {
+        domain: "social.marud.fr",
+    },
+    {
+        domain: "savoie.social",
+    },
+];
+const techInstances = [
+    {
+        domain: "infosec.town",
+        description: "A Firefish server for info/cyber security-minded people.",
+        icon: "/images/forced_icons/infosec.webp",
+    },
+    {
+        domain: "calckey.aokaga.work",
+        description: "\u30AC\u30B8\u30A7\u30C3\u30C8\u3084\u30D7\u30ED\u30B0\u30E9\u30DF\u30F3\u30B0\u3001\u30B5\u30D6\u30AB\u30EB\u5927\u597D\u304D\u306A\u30AA\u30BF\u30AF\u5927\u6B53\u8FCE \u7279\u306B\u30B3\u30F3\u30BB\u30D7\u30C8\u306F\u5B9A\u3081\u3066\u3044\u306A\u3044\u306E\u3067\u3001\u305D\u308C\u4EE5\u5916\u3067\u3082\u7279\u306B\u6C17\u306B\u3057\u307E\u305B\u3093\u3002",
+    },
+    {
+        domain: "firefish.tech",
+    },
+];
+const artInstances = [
+    {
+        domain: "electricrequiem.com",
+        description: "\u03A4\u03BF Electric Requiem \u03B5\u03AF\u03BD\u03B1\u03B9 \u03AD\u03BD\u03B1 \u03B5\u03BB\u03B5\u03CD\u03B8\u03B5\u03C1\u03BF \u03BA\u03BF\u03B9\u03BD\u03C9\u03BD\u03B9\u03BA\u03CC \u03B4\u03AF\u03BA\u03C4\u03C5\u03BF, \u03BC\u03AD\u03C1\u03BF\u03C2 \u03C4\u03BF\u03C5 \u03B1\u03C0\u03BF\u03BA\u03B5\u03BD\u03C4\u03C1\u03C9\u03BC\u03AD\u03BD\u03BF\u03C5 Fediverse.",
+        icon: "/images/forced_icons/electric_requiem.webp",
+    },
+];
+const lgbtqInstances = [
+    {
+        domain: "queerfedi.com",
+        icon: "/images/forced_icons/queerfediicon.avif",
+        banner: "https://bunnyt1c.s3.us-east-005.backblazeb2.com/calckeysoc/84a2cfa9-953f-4d58-822b-64777dbd38f3.png",
+    },
+    {
+        domain: "lamp.leemoon.network",
+    },
+    {
+        domain: "transgirl.cafe",
+        banner: "https://storage.serverius.net/ffmedia:social/social/ca1e84dd-7ecd-4cc0-bb3f-5391d7009d30.png",
+    },
+];
+const activismInstances = [
+    {
+        domain: "animalesenfu.ga",
+    },
+    {
+        domain: "social.aunaturel.club",
+    },
+    {
+        domain: "satanic.nexus",
+    },
+];
+const gamingInstances = [
+    {
+        domain: "easymode.im",
+    },
+    {
+        domain: "hub.adrelien.com",
+    },
+    {
+        domain: "gamethattune.club",
+        description: "We're fans of listening to videogame music, goofing off, and having fun!",
+        icon: "/images/forced_icons/gtt.webp",
+    },
+    {
+        domain: "gamerplus.org",
+        description: "Welcome to Gamer Plus. Like games? So do we. Feel free to join our community.",
+    },
+];
+const furryInstances = [
+    {
+        domain: "stop.voring.me",
+        verified: true,
+    },
+    {
+        domain: "therian.club",
+    },
+    {
+        domain: "furry.band",
+        description: "A Firefish server for furries who band together... and play or like music!",
+    },
+    {
+        domain: "kitty.social",
+        banner: "https://blob.jortage.com/blobs/2/ab1/2ab149e7b8350273e923dd1db7574606875874809d23d9d7eca8507582f92c2826fedac019d35192c008e38603a6acdede0145ddea3f38050297682b3ae0d036",
+    },
+    {
+        domain: "glub.slipfox.xyz",
+    },
+    {
+        domain: "derg.social",
+    },
+    {
+        domain: "social.shibabox.eu",
+    },
+];
+const animeInstances = [
+    {
+        domain: "mecha.garden",
+    },
+    {
+        domain: "minazukey.uk",
+        description: "\u307F\u3093\u306A\u5927\u597D\u304D\u3001\u7686\u597D\u304D\u6751\u3002\u548C\u98A8\u30DB\u30E9\u30FC\u56E0\u7FD2\u6751\u30C1\u30C3\u30AF\u306AFirefish\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u3067\u3059\u3002",
+    },
+    {
+        domain: "sakurajima.social",
+        description: "A comfy, non-toxic, and inclusive Firefish server for anime/manga/Japanese media fans & content creators.",
+    },
+];
+const sportsInstances = [
+    {
+        domain: "bball.city",
+    },
+];
+const nsfwInstances = [
+    {
+        domain: "hyper.equipment",
+    },
+    {
+        domain: "nsfw.lgbt",
+    },
+    {
+        domain: "nsfw.social",
+    },
+];
+const allInstances = [
+    generalInstances,
+    regionalInstances,
+    techInstances,
+    artInstances,
+    lgbtqInstances,
+    activismInstances,
+    gamingInstances,
+    furryInstances,
+    animeInstances,
+    sportsInstances,
+    nsfwInstances,
+];
+---
+
+<Layout title="Server List">
+    <Hero>
+        <h1>{t("join.title")}</h1>
+        <p>
+            {t("join.sub1")}
+            {t("join.sub2")}
+            <span class="highlight">&nbsp;{t("join.sub3")}&nbsp;</span>
+            <span class="highlight">{t("join.sub4")}&nbsp;</span>
+            {t("join.sub5")}
+            <span class="highlight">&nbsp;{t("join.sub6")}</span>
+        </p>
+        <!-- <p>
+            {t("join.sub7")}
+            <a href="https://firefish.social" data-umami-event="Join Flagship"><span class="highlight" style="color: var(--hashtag)">&nbsp;{t("join.sub8")}</span></a>
+        </p> -->
+        <div class="flex">
+            <!-- <IconLabelButton
+                classes="solid"
+                href="https://firefish.social"
+                target="_blank"
+                data-umami-event="Join Flagship"
+            >
+                {t("join.flagship")}
+            </IconLabelButton> -->
+            <IconLabelButton
+                href="https://git.joinfirefish.org/firefish/joinfirefish/-/issues/new?issue[title]=%5BServer%5D%3A&issue[description]=%3C!--%20Thank%20you%20for%20taking%20the%20time%20to%20submit%20your%20server%20and%20make%20Firefish%20a%20more%20rich%20and%20diverse%20ecosystem!%20Please%20note%20it%20may%20take%20up%20to%2024%20hours%20for%20your%20server%20to%20appear%20on%20the%20website%20after%20being%20accepted.%20Please%20make%20sure%20your%20server%20allows%20the%20%60FirefishOrg/0.1.0;%20%2Bhttps://joinfirefish.org/join%60%20to%20query%20data.%20--%3E%0A%0A**What%27s%20the%20URL%20of%20your%20server?**%0A%0A**Tell%20us%20about%20your%20server!**%0A_What%20goes%20on%20in%20your%20server?%20Is%20it%20big%20or%20small?%20Is%20it%20well%20moderated?%20We%20want%20to%20hear%20it%20all!_%0A%0A**Agreement**%0ADo%20you%20agree%20to%20the%20[server%20guidelines](https://git.joinfirefish.org/firefish/joinfirefish/-/blob/main/SERVER_GUIDELINES.md)?%0A-%20[]%20Yes,%20I%20agree%20to%20the%20server%20guidelines.%0A%0A**What%20category%20do%20you%20believe%20your%20server%20best%20falls%20into?**%0A-%20General%0A-%20Regional%0A-%20Tech%0A-%20Art%0A-%20LGBTQ%2B%0A-%20Activism%0A-%20Gaming%0A-%20Furry%0A-%20Anime%0A-%20NSFW%0A-%20Other%20(Please%20Specify)"
+                target="_blank"
+                data-umami-event="Submit Server"
+            >
+                {t("join.submit")}
+            </IconLabelButton>
+        </div>
+        <div slot="graphic">
+            <UI1 />
+            <div class="fake-post">
+                <PostContainer>
+                    <PostReply
+                        readable
+                        name="Panda"
+                        at="@panda@pandasin.space"
+                        ticker="Pandas In Space"
+                    >
+                        <p>
+                            {t("join.post1")}
+                            {t("join.post2")}
+                        </p>
+                    </PostReply>
+                    <Post
+                        readable
+                        name="Cat"
+                        at="@cat@foxes.social"
+                        ticker="Foxes"
+                    >
+                        <p>
+                            {t("join.post3")}
+                            {t("join.post4")}
+                            {t("join.post5")}
+                        </p>
+                    </Post>
+                </PostContainer>
+            </div>
+        </div>
+    </Hero>
+    <div class="sections" id="instances-list">
+        <div class="flex gap">
+            <aside>
+                <section>
+                    <h3>{t("join.safety")}</h3>
+                    <p>{t("join.safetySub1")}&nbsp;<a href="https://git.joinfirefish.org/firefish/joinfirefish/-/blob/main/SERVER_GUIDELINES.md">{t("join.safetySub2")}</a>&nbsp;{t("join.safetySub3")}</p>
+                </section>
+                <section id="list">
+                    <h3>{t("join.categories")}</h3>
+                    {
+                        categories.map((category) => (
+                            <IconLabelButton
+                                href={`#${category.toLowerCase()}`}
+                            >
+                                <Mention>
+                                    {
+                                        allInstances[
+                                            categories.indexOf(category)
+                                        ].length
+                                    }
+                                </Mention>
+                                {category}
+                            </IconLabelButton>
+                        ))
+                    }
+                </section>
+            </aside>
+            <div class="instances-grid">
+                {
+                    categories.map((category) => (
+                        <section id={category}>
+                            <h3 id={category.toLowerCase()}>
+                                {category}
+                                <Mention>
+                                    {
+                                        allInstances[
+                                            categories.indexOf(category)
+                                        ].length
+                                    }
+                                </Mention>
+                            </h3>
+                            {allInstances[categories.indexOf(category)].map(
+                                (instance: Instance) => (
+                                    <InstanceCard
+                                        name={instance.name}
+                                        description={instance.description}
+                                        verified={instance.verified}
+                                        userCount={instance.users}
+                                        url={instance.domain}
+                                        icon={instance.icon}
+                                        banner={instance.banner}
+                                        version={instance.version}
+                                        color={instance.color}
+                                        nsfw={category === "NSFW"}
+                                    />
+                                )
+                            )}
+                        </section>
+                    ))
+                }
+            </div>
+        </div>
+        <div class="cards" id="getstarted">
+            <section class="card split highlight">
+                <div>
+                    <h2>{t("join.notInterested")}</h2>
+                    <p>{t("join.createOwn")}</p>
+                    <div class="flex gap small">
+                        <a
+                            class="button themed glow"
+                            href="https://git.joinfirefish.org/firefish/firefish#-getting-started"
+                            target="_blank">{t("join.learn")}</a
+                        >
+                    </div>
+                </div>
+                <div class="themed">
+                    <Data />
+                </div>
+            </section>
+        </div>
+    </div>
+</Layout>
+<style lang="stylus">
+    #list
+        position sticky
+        top 0
+        max-height 100vh
+        overflow-y auto
+        margin-inline -20px
+        padding 20px
+        margin-top -30px
+        mask linear-gradient(transparent, black 40px calc(100% - 40px), transparent)
+        -webkit-mask @mask
+	aside
+		// position sticky
+		// top 0px
+		// height 100vh
+		width 0
+		min-width 225px
+		flex-grow 1
+		// overflow-y auto
+		// box-sizing border-box
+		// margin-inline -2em
+		// padding-inline 2em
+		// padding-bottom 2em
+		// padding-block 1em
+		> section
+			display flex
+			flex-wrap wrap
+			min-width inherit
+			:global(> a)
+				width 18ch
+				flex-grow 1
+			h3
+				width 100%
+		p
+			font-size .9em
+		// .bordered
+		// 	margin-left -.7em
+	h1
+		width 100%
+	.instances-grid
+		display grid
+		grid-template-columns repeat(auto-fit, minmax(250px, 1fr))
+		gap 20px
+		flex-grow 99999
+		flex-basis 550px
+		> section
+			display contents
+		h3
+			margin 0
+			margin-top 1em
+			grid-column 1 / -1
+	h3
+		margin-bottom .5em
+</style>
