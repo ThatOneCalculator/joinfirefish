@@ -223,10 +223,10 @@ const gamingInstances = [
     },
 ];
 const furryInstances = [
-    {
-        domain: "stop.voring.me",
-        verified: true,
-    },
+    // {
+    //     domain: "stop.voring.me",
+    //     verified: true,
+    // },
     {
         domain: "therian.club",
     },
@@ -290,6 +290,75 @@ const allInstances = [
     sportsInstances,
     nsfwInstances,
 ];
+
+async function api(url, endpoint) {
+    const data = await fetch(`https://${url}/api/${endpoint}`, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "User-Agent": "FirefishOrg/0.1.0; +https://joinfirefish.org/join",
+        },
+    }).then((response) => response.json());
+    return data;
+}
+for (let category of categories) {
+    await Promise.all(allInstances[categories.indexOf(category)].map(async (instance: Instance) => {
+        try {
+            console.log(`Fetching meta for ${instance.domain}`);
+            const meta = await api(instance.domain, "meta");
+            instance.name = meta.name
+                .match(/^[^(]*/)[0]
+                .trim();
+            instance.version = meta.version;
+            instance.color = meta.themeColor;
+            if (instance.color?.toLowerCase() === "#31748f")
+                instance.color = null;
+            if (!instance.icon) {
+                if (meta.iconUrl)
+                    instance.icon = meta.iconUrl;
+                else
+                    instance.icon = `/branding/wordmark.svg`;
+            }
+            if (!instance.banner) {
+                if (meta.backgroundImageUrl)
+                    instance.banner =
+                        meta.backgroundImageUrl;
+                else if (meta.bannerUrl)
+                    instance.banner = meta.bannerUrl;
+            }
+            if (instance.description == null)
+                instance.description = tokenize(meta.description)
+                    .replace(/instance/gi, "server")
+                    .replace(/Calckey/gi, "Firefish")
+                    .replace(/(<([^>]+)>)/gi, "");
+            console.log(`Success on ${instance.domain}`);
+        }
+        catch (e) {
+            console.log(`Error fetching meta on ${instance.domain}`);
+            console.log(e);
+            if (!instance.icon) {
+                instance.icon = `https://${instance.domain}/favicon.ico`;
+            }
+        }
+        try {
+            console.log(`Fetching stats for ${instance.domain}`);
+            const stats = await api(instance.domain, "stats");
+            instance.users = stats.originalUsersCount;
+            allInstances[categories.indexOf(category)].sort((a, b) => {
+                return a.verified === b.verified
+                    ? b.users - a.users
+                    : a.verified
+                        ? -1
+                        : 1;
+            });
+        }
+        catch {
+            console.log(`Error fetching stats on ${instance.domain}`);
+        }
+    }));
+}
+
 ---
 
 <Layout title="Server List">
